@@ -18,8 +18,8 @@ class SubCategoriaSearch extends SubCategoria
     public function rules()
     {
         return [
+            [['sub_CategoriaID', 'Cod_Categoria'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'safe'],
-            [['Cod_Categoria', 'sub_CategoriaID'], 'integer'],
         ];
     }
 
@@ -59,8 +59,8 @@ class SubCategoriaSearch extends SubCategoria
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Cod_Categoria' => $this->Cod_Categoria,
             'sub_CategoriaID' => $this->sub_CategoriaID,
+            'Cod_Categoria' => $this->Cod_Categoria,
         ]);
 
         $query->andFilterWhere(['like', 'Nombre_SubCat', $this->Nombre_SubCat])

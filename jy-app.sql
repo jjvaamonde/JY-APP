@@ -333,10 +333,10 @@ CREATE TABLE `reclamos` (
 --
 
 CREATE TABLE `sub_categoria` (
+  `sub_CategoriaID` int(11) NOT NULL,
   `Nombre_SubCat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Descripcion_Subcat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Cod_Categoria` int(11) NOT NULL,
-  `sub_CategoriaID` int(11) NOT NULL
+  `Cod_Categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -687,6 +687,11 @@ ALTER TABLE `ventas_usuario`
 --
 ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `sub_categoria`
+--
+ALTER TABLE `sub_categoria`
+  MODIFY `sub_CategoriaID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
