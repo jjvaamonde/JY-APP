@@ -4,9 +4,9 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SubCategoria */
+/* @var $model backend\models\SubCategoria */
 
-$this->title = 'Create Sub Categoria';
+$this->title = 'Crear Sub-Categoria';
 $this->params['breadcrumbs'][] = ['label' => 'Sub Categorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\SubCategoria;
+use backend\models\SubCategoria;
 use app\models\SubCategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -5,10 +5,10 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\SubCategoria;
+use backend\models\SubCategoria;
 
 /**
- * SubCategoriaSearch represents the model behind the search form about `app\models\SubCategoria`.
+ * SubCategoriaSearch represents the model behind the search form about `backend\models\SubCategoria`.
  */
 class SubCategoriaSearch extends SubCategoria
 {
@@ -18,8 +18,8 @@ class SubCategoriaSearch extends SubCategoria
     public function rules()
     {
         return [
-            [['Nombre_SubCat', 'Descripcion_Subcat', 'Cod_Categoria'], 'safe'],
-            [['sub_CategoriaID'], 'integer'],
+            [['sub_CategoriaID', 'Cod_Categoria'], 'integer'],
+            [['Nombre_SubCat', 'Descripcion_Subcat'], 'safe'],
         ];
     }
 
@@ -60,11 +60,11 @@ class SubCategoriaSearch extends SubCategoria
         // grid filtering conditions
         $query->andFilterWhere([
             'sub_CategoriaID' => $this->sub_CategoriaID,
+            'Cod_Categoria' => $this->Cod_Categoria,
         ]);
 
         $query->andFilterWhere(['like', 'Nombre_SubCat', $this->Nombre_SubCat])
-            ->andFilterWhere(['like', 'Descripcion_Subcat', $this->Descripcion_Subcat])
-            ->andFilterWhere(['like', 'Cod_Categoria', $this->Cod_Categoria]);
+            ->andFilterWhere(['like', 'Descripcion_Subcat', $this->Descripcion_Subcat]);
 
         return $dataProvider;
     }
