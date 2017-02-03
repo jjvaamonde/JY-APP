@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SubCategoria */
+/* @var $model backend\models\SubCategoria */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Descripcion_Subcat')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Cod_Categoria')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Cod_Categoria')->textInput() ?>
 
     <?= $form->field($model, 'sub_CategoriaID')->textInput() ?>
 
