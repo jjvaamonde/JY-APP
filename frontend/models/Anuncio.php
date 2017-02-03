@@ -52,7 +52,7 @@ class Anuncio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'arr_Imagen' => 'Arr  Imagen',
+            'arr_Imagen' => 'Imagenes',
             'Categoria' => 'Categoria',
             'Clasificacion' => 'Clasificacion',
             'Descripcion' => 'Descripcion',

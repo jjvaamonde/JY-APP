@@ -9,8 +9,10 @@ use Yii;
  *
  * @property string $Nombre_SubCat
  * @property string $Descripcion_Subcat
- * @property string $Cod_Categoria
+ * @property integer $Cod_Categoria
  * @property integer $sub_CategoriaID
+ *
+ * @property Categoria $codCategoria
  */
 class SubCategoria extends \yii\db\ActiveRecord
 {
@@ -29,8 +31,10 @@ class SubCategoria extends \yii\db\ActiveRecord
     {
         return [
             [['Nombre_SubCat', 'Descripcion_Subcat', 'Cod_Categoria', 'sub_CategoriaID'], 'required'],
-            [['sub_CategoriaID'], 'integer'],
-            [['Nombre_SubCat', 'Descripcion_Subcat', 'Cod_Categoria'], 'string', 'max' => 50],
+            [['Cod_Categoria', 'sub_CategoriaID'], 'integer'],
+            [['Nombre_SubCat', 'Descripcion_Subcat'], 'string', 'max' => 50],
+            [['Cod_Categoria'], 'unique'],
+            [['Cod_Categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['Cod_Categoria' => 'categoriaID']],
         ];
     }
 
@@ -45,5 +49,13 @@ class SubCategoria extends \yii\db\ActiveRecord
             'Cod_Categoria' => 'Cod  Categoria',
             'sub_CategoriaID' => 'Sub  Categoria ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCodCategoria()
+    {
+        return $this->hasOne(Categoria::className(), ['categoriaID' => 'Cod_Categoria']);
     }
 }
