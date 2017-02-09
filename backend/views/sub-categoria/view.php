@@ -29,9 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'sub_CategoriaID',
+            'Cod_Categoria',
             'Nombre_SubCat',
             'Descripcion_Subcat',
-            'Cod_Categoria',
+            'status_sub',
         ],
     ]) ?>
 

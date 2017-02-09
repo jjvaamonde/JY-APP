@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SubCategoriaSearch */
+/* @var $model backend\models\SubCategoriaSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,11 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sub_CategoriaID') ?>
 
+    <?= $form->field($model, 'Cod_Categoria') ?>
+
     <?= $form->field($model, 'Nombre_SubCat') ?>
 
     <?= $form->field($model, 'Descripcion_Subcat') ?>
 
-    <?= $form->field($model, 'Cod_Categoria') ?>
+    <?= $form->field($model, 'status_sub') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

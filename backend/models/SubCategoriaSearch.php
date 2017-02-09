@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
@@ -18,7 +18,7 @@ class SubCategoriaSearch extends SubCategoria
     public function rules()
     {
         return [
-            [['sub_CategoriaID', 'Cod_Categoria'], 'integer'],
+            [['sub_CategoriaID', 'Cod_Categoria', 'status_sub'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class SubCategoriaSearch extends SubCategoria
         $query->andFilterWhere([
             'sub_CategoriaID' => $this->sub_CategoriaID,
             'Cod_Categoria' => $this->Cod_Categoria,
+            'status_sub' => $this->status_sub,
         ]);
 
         $query->andFilterWhere(['like', 'Nombre_SubCat', $this->Nombre_SubCat])

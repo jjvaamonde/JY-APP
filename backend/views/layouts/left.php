@@ -8,7 +8,7 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -30,8 +30,14 @@
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Categoria', 'icon' => 'fa fa-file-code-o', 'url' => ['/categoria']],
+                    ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
+                    ['label' => 'Categoria', 
+                        'icon' => 'glyphicon glyphicon-copyright-mark', 
+                        'url' => ['/categoria'],
+                        'items' => [
+                            ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
+                            ],
+                        ],
                     ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
                     ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
@@ -64,6 +70,7 @@
                     ],
                 ],
             ]
+         
         ) ?>
 
     </section>

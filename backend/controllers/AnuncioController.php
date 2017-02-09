@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use app\models\Anuncio;
-use app\models\AnuncioSearch;
+use backend\models\Anuncio;
+use backend\models\AuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class AnuncioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AnuncioSearch();
+        $searchModel = new AuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

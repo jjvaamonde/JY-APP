@@ -18,8 +18,8 @@ class CategoriaSearch extends Categoria
     public function rules()
     {
         return [
-            [['Nombre_Categ', 'Descripcion_Cate', 'arr_SubCategoria'], 'safe'],
-            [['categoriaID'], 'integer'],
+            [['categoriaID', 'Cantidad_SubCategoria', 'status_cate'], 'integer'],
+            [['Nombre_Categ', 'Descripcion_Cate'], 'safe'],
         ];
     }
 
@@ -53,18 +53,19 @@ class CategoriaSearch extends Categoria
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-           // $query->where('0=1');
+            // $query->where('0=1');
             return $dataProvider;
         }
 
         // grid filtering conditions
         $query->andFilterWhere([
             'categoriaID' => $this->categoriaID,
+            'Cantidad_SubCategoria' => $this->Cantidad_SubCategoria,
+            'status_cate' => $this->status_cate,
         ]);
 
         $query->andFilterWhere(['like', 'Nombre_Categ', $this->Nombre_Categ])
-            ->andFilterWhere(['like', 'Descripcion_Cate', $this->Descripcion_Cate])
-            ->andFilterWhere(['like', 'arr_SubCategoria', $this->arr_SubCategoria]);
+            ->andFilterWhere(['like', 'Descripcion_Cate', $this->Descripcion_Cate]);
 
         return $dataProvider;
     }
