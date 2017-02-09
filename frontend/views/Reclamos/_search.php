@@ -4,26 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SubCategoriaSearch */
+/* @var $model app\models\ReclamosSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sub-categoria-search">
+<div class="reclamos-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'sub_CategoriaID') ?>
+    <?= $form->field($model, 'Fecha') ?>
 
-    <?= $form->field($model, 'Cod_Categoria') ?>
+    <?= $form->field($model, 'Motivo') ?>
 
-    <?= $form->field($model, 'Nombre_SubCat') ?>
+    <?= $form->field($model, 'Descripcion') ?>
 
-    <?= $form->field($model, 'Descripcion_Subcat') ?>
+    <?= $form->field($model, 'Estatus') ?>
 
-    <?= $form->field($model, 'status_sub') ?>
+    <?= $form->field($model, 'reclamosID') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

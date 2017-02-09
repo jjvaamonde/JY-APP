@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Anuncio;
+use app\models\Reclamos;
 
 /**
- * AnuncioSearch represents the model behind the search form about `app\models\Anuncio`.
+ * ReclamosSearch represents the model behind the search form about `app\models\Reclamos`.
  */
-class AnuncioSearch extends Anuncio
+class ReclamosSearch extends Reclamos
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class AnuncioSearch extends Anuncio
     public function rules()
     {
         return [
-            [['arr_Imagen', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Titulo', 'Nombre_Vendedor', 'Fecha_Publicacion'], 'safe'],
-            [['Categoria', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'Fecha_Caducidad', 'anuncioID'], 'integer'],
+            [['Fecha', 'Motivo', 'Descripcion', 'Estatus'], 'safe'],
+            [['reclamosID'], 'integer'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AnuncioSearch extends Anuncio
      */
     public function search($params)
     {
-        $query = Anuncio::find();
+        $query = Reclamos::find();
 
         // add conditions that should always apply here
 
@@ -59,20 +59,13 @@ class AnuncioSearch extends Anuncio
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'Categoria' => $this->Categoria,
-            'Cantidad_Articulo' => $this->Cantidad_Articulo,
-            'Calificacion_Vendedor' => $this->Calificacion_Vendedor,
-            'Fecha_Publicacion' => $this->Fecha_Publicacion,
-            'Fecha_Caducidad' => $this->Fecha_Caducidad,
-            'anuncioID' => $this->anuncioID,
+            'Fecha' => $this->Fecha,
+            'reclamosID' => $this->reclamosID,
         ]);
 
-        $query->andFilterWhere(['like', 'arr_Imagen', $this->arr_Imagen])
-            ->andFilterWhere(['like', 'Clasificacion', $this->Clasificacion])
+        $query->andFilterWhere(['like', 'Motivo', $this->Motivo])
             ->andFilterWhere(['like', 'Descripcion', $this->Descripcion])
-            ->andFilterWhere(['like', 'DireccionVendedor', $this->DireccionVendedor])
-            ->andFilterWhere(['like', 'Titulo', $this->Titulo])
-            ->andFilterWhere(['like', 'Nombre_Vendedor', $this->Nombre_Vendedor]);
+            ->andFilterWhere(['like', 'Estatus', $this->Estatus]);
 
         return $dataProvider;
     }

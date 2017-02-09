@@ -8,11 +8,14 @@ use Yii;
  * This is the model class for table "sub_categoria".
  *
  * @property integer $sub_CategoriaID
+ * @property integer $Cod_Categoria
  * @property string $Nombre_SubCat
  * @property string $Descripcion_Subcat
- * @property integer $Cod_Categoria
+ * @property integer $status_sub
  *
- * @property Categoria $codCategoria
+ * @property Anuncio $anuncio
+ * @property JoinsubCategoriatoanuncio[] $joinsubCategoriatoanuncios
+ * @property JoinsubCategoriatocategoria[] $joinsubCategoriatocategorias
  */
 class SubCategoria extends \yii\db\ActiveRecord
 {
@@ -30,11 +33,10 @@ class SubCategoria extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre_SubCat', 'Descripcion_Subcat', 'Cod_Categoria'], 'required'],
-            [['Cod_Categoria'], 'integer'],
+            [['Cod_Categoria', 'Nombre_SubCat', 'Descripcion_Subcat', 'status_sub'], 'required'],
+            [['Cod_Categoria', 'status_sub'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'string', 'max' => 50],
             [['Cod_Categoria'], 'unique'],
-            [['Cod_Categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['Cod_Categoria' => 'categoriaID']],
         ];
     }
 
@@ -45,17 +47,34 @@ class SubCategoria extends \yii\db\ActiveRecord
     {
         return [
             'sub_CategoriaID' => 'Sub  Categoria ID',
-            'Nombre_SubCat' => 'Nombre ',
-            'Descripcion_Subcat' => 'Descripcion  ',
-            'Cod_Categoria' => 'Categoria a la cual pertenece',
+            'Cod_Categoria' => 'Cod  Categoria',
+            'Nombre_SubCat' => 'Nombre  Sub Cat',
+            'Descripcion_Subcat' => 'Descripcion  Subcat',
+            'status_sub' => 'Status Sub',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCodCategoria()
+    public function getAnuncio()
     {
-        return $this->hasOne(Categoria::className(), ['categoriaID' => 'Cod_Categoria']);
+        return $this->hasOne(Anuncio::className(), ['Sub_Categoria' => 'sub_CategoriaID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJoinsubCategoriatoanuncios()
+    {
+        return $this->hasMany(JoinsubCategoriatoanuncio::className(), ['sub_CategoriaID' => 'sub_CategoriaID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJoinsubCategoriatocategorias()
+    {
+        return $this->hasMany(JoinsubCategoriatocategoria::className(), ['sub_CategoriaID' => 'sub_CategoriaID']);
     }
 }

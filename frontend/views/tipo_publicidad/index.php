@@ -2,27 +2,27 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SubCategoriaSearch */
+/* @var $searchModel app\models\tipo_publicidadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sub Categorias';
+$this->title = 'Tipopubicidads';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sub-categoria-index">
+<div class="tipopubicidad-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Sub Categoria', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tipopubicidad', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= ListView::widget([
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->sub_CategoriaID), ['view', 'id' => $model->sub_CategoriaID]);
+            return Html::a(Html::encode($model->tipo_PubicidadID), ['view', 'id' => $model->tipo_PubicidadID]);
         },
     ]) ?>
-<?php Pjax::end(); ?></div>
+</div>

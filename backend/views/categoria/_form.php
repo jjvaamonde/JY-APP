@@ -16,12 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Descripcion_Cate')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'arr_SubCategoria')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'categoriaID')->textInput() ?>
+    <?= $form->field($model, 'Cantidad_SubCategoria')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -7,13 +7,18 @@ use Yii;
 /**
  * This is the model class for table "categoria".
  *
+ * @property integer $categoriaID
  * @property string $Nombre_Categ
  * @property string $Descripcion_Cate
- * @property string $arr_SubCategoria
- * @property integer $categoriaID
+ * @property integer $Cantidad_SubCategoria
+ * @property integer $status_cate
+ *
+ * @property JoinsubCategoriatocategoria[] $joinsubCategoriatocategorias
  */
 class Categoria extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
@@ -28,9 +33,11 @@ class Categoria extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre_Categ', 'Descripcion_Cate', 'arr_SubCategoria', 'categoriaID'], 'required'],
-            [['categoriaID'], 'integer'],
-            [['Nombre_Categ', 'Descripcion_Cate', 'arr_SubCategoria'], 'string', 'max' => 50],
+            [['Nombre_Categ', 'Descripcion_Cate', 'Cantidad_SubCategoria', 'status_cate'], 'required'],
+            [['Cantidad_SubCategoria', 'status_cate'], 'integer'],
+            [['Nombre_Categ', 'Descripcion_Cate'], 'string', 'max' => 50],
+            ['status_cate', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status_cate', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -40,10 +47,19 @@ class Categoria extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre_Categ' => 'Nombre  Categ',
-            'Descripcion_Cate' => 'Descripcion  Cate',
-            'arr_SubCategoria' => 'Arr  Sub Categoria',
-            'categoriaID' => 'Categoria ID',
+            'categoriaID' => 'Codigo Categoria',
+            'Nombre_Categ' => 'Nombre ',
+            'Descripcion_Cate' => 'Descripcion ',
+            'Cantidad_SubCategoria' => 'Cantidad  de Sub Categorias',
+            'status_cate' => 'Estado Categoria',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJoinsubCategoriatocategorias()
+    {
+        return $this->hasMany(JoinsubCategoriatocategoria::className(), ['categoriaID' => 'categoriaID']);
     }
 }

@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\SubCategoria;
-use backend\models\SubCategoriaSearch;
-use backend\models\Categoria;
+use backend\models\Anuncio;
+use backend\models\AuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SubCategoriaController implements the CRUD actions for SubCategoria model.
+ * AnuncioController implements the CRUD actions for Anuncio model.
  */
-class SubCategoriaController extends Controller
+class AnuncioController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Lists all SubCategoria models.
+     * Lists all Anuncio models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SubCategoriaSearch();
+        $searchModel = new AuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Displays a single SubCategoria model.
+     * Displays a single Anuncio model.
      * @param integer $id
      * @return mixed
      */
@@ -58,16 +57,16 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Creates a new SubCategoria model.
+     * Creates a new Anuncio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SubCategoria();
+        $model = new Anuncio();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->sub_CategoriaID]);
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,7 +75,7 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Updates an existing SubCategoria model.
+     * Updates an existing Anuncio model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,7 +85,7 @@ class SubCategoriaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->sub_CategoriaID]);
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -95,7 +94,7 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Deletes an existing SubCategoria model.
+     * Deletes an existing Anuncio model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,23 +107,18 @@ class SubCategoriaController extends Controller
     }
 
     /**
-     * Finds the SubCategoria model based on its primary key value.
+     * Finds the Anuncio model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SubCategoria the loaded model
+     * @return Anuncio the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SubCategoria::findOne($id)) !== null) {
+        if (($model = Anuncio::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    public static function getListaCate()
-{
-    $opciones = Categoria::find()->asArray()->all();
-    return ArrayHelper::map($opciones, 'categoriaID', 'Nombre_Categ');
-}
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace app\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\SubCategoria;
+use app\models\Tipopubicidad;
 
 /**
- * SubCategoriaSearch represents the model behind the search form about `backend\models\SubCategoria`.
+ * tipo_publicidadSearch represents the model behind the search form about `app\models\Tipopubicidad`.
  */
-class SubCategoriaSearch extends SubCategoria
+class tipo_publicidadSearch extends Tipopubicidad
 {
     /**
      * @inheritdoc
@@ -18,8 +18,9 @@ class SubCategoriaSearch extends SubCategoria
     public function rules()
     {
         return [
-            [['sub_CategoriaID', 'Cod_Categoria', 'status_sub'], 'integer'],
-            [['Nombre_SubCat', 'Descripcion_Subcat'], 'safe'],
+            [['Nombre', 'Descripcion', 'Duracion_paraMostrar'], 'safe'],
+            [['Precio_TPubli'], 'number'],
+            [['Caducidad', 'tipo_PubicidadID'], 'integer'],
         ];
     }
 
@@ -41,7 +42,7 @@ class SubCategoriaSearch extends SubCategoria
      */
     public function search($params)
     {
-        $query = SubCategoria::find();
+        $query = Tipopubicidad::find();
 
         // add conditions that should always apply here
 
@@ -59,13 +60,14 @@ class SubCategoriaSearch extends SubCategoria
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'sub_CategoriaID' => $this->sub_CategoriaID,
-            'Cod_Categoria' => $this->Cod_Categoria,
-            'status_sub' => $this->status_sub,
+            'Precio_TPubli' => $this->Precio_TPubli,
+            'Duracion_paraMostrar' => $this->Duracion_paraMostrar,
+            'Caducidad' => $this->Caducidad,
+            'tipo_PubicidadID' => $this->tipo_PubicidadID,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre_SubCat', $this->Nombre_SubCat])
-            ->andFilterWhere(['like', 'Descripcion_Subcat', $this->Descripcion_Subcat]);
+        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Descripcion', $this->Descripcion]);
 
         return $dataProvider;
     }
