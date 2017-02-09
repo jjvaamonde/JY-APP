@@ -64,9 +64,17 @@ class CategoriaController extends Controller
     public function actionCreate()
     {
         $model = new Categoria();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->categoriaID]);
+      //  if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+        if ($model->load(Yii::$app->request->post()))
+        { 
+            $model->status_cate='1';
+            if($model->save())
+            {
+                return $this->redirect(['view', 'id' => $model->categoriaID]);
+            }else
+                print_r($model->getErrors());
+              
+          //return $this->redirect(['view', 'id' => $model->categoriaID]);
         } else {
             return $this->render('create', [
                 'model' => $model,

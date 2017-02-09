@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Categoria */
 
-$this->title = $model->categoriaID;
+$this->title = $model->Nombre_Categ;
 $this->params['breadcrumbs'][] = ['label' => 'Categorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,10 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'categoriaID',
             'Nombre_Categ',
             'Descripcion_Cate',
-            'arr_SubCategoria',
-            'categoriaID',
+            'Cantidad_SubCategoria',
+           // 'status_cate',
         ],
     ]) ?>
 

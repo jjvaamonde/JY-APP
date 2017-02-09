@@ -1,18 +1,18 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use Yii;
-use app\models\Anuncio;
-use app\models\AnuncioSearch;
+use app\models\CuotaCredito;
+use app\models\CuotaCreditoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnuncioController implements the CRUD actions for Anuncio model.
+ * CuotaCreditoController implements the CRUD actions for CuotaCredito model.
  */
-class AnuncioController extends Controller
+class CuotaCreditoController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Lists all Anuncio models.
+     * Lists all CuotaCredito models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AnuncioSearch();
+        $searchModel = new CuotaCreditoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Displays a single Anuncio model.
+     * Displays a single CuotaCredito model.
      * @param integer $id
      * @return mixed
      */
@@ -57,16 +57,16 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Creates a new Anuncio model.
+     * Creates a new CuotaCredito model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Anuncio();
+        $model = new CuotaCredito();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+            return $this->redirect(['view', 'id' => $model->cuota_CreditoID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,7 +75,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Updates an existing Anuncio model.
+     * Updates an existing CuotaCredito model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -85,7 +85,7 @@ class AnuncioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+            return $this->redirect(['view', 'id' => $model->cuota_CreditoID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,7 +94,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Deletes an existing Anuncio model.
+     * Deletes an existing CuotaCredito model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Finds the Anuncio model based on its primary key value.
+     * Finds the CuotaCredito model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Anuncio the loaded model
+     * @return CuotaCredito the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Anuncio::findOne($id)) !== null) {
+        if (($model = CuotaCredito::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

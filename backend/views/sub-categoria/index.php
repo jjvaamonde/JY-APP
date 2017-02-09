@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\widgets\ListView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\SubCategoriaSearch */
+/* @var $searchModel backend\models\SubCategoriaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Sub Categorias';
@@ -13,23 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="sub-categoria-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Sub Categoria', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'Nombre_SubCat',
-            'Descripcion_Subcat',
-            'Cod_Categoria',
-            'sub_CategoriaID',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) {
+            return Html::a(Html::encode($model->sub_CategoriaID), ['view', 'id' => $model->sub_CategoriaID]);
+        },
+    ]) ?>
 <?php Pjax::end(); ?></div>

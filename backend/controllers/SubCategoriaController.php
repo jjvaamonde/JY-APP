@@ -1,10 +1,11 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use Yii;
-use app\models\SubCategoria;
-use app\models\SubCategoriaSearch;
+use backend\models\SubCategoria;
+use backend\models\SubCategoriaSearch;
+use backend\models\Categoria;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -121,4 +122,9 @@ class SubCategoriaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public static function getListaCate()
+{
+    $opciones = Categoria::find()->asArray()->all();
+    return ArrayHelper::map($opciones, 'categoriaID', 'Nombre_Categ');
+}
 }
