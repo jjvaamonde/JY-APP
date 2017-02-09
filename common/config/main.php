@@ -1,7 +1,7 @@
 <?php
 return
 [
-  
+
   'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
   'bootstrap' => ['debug'],
    'bootstrap' => ['gii'],
@@ -12,26 +12,23 @@ return
         'class' => 'mdm\admin\Module',
       ],
 
-      'gii' => 
+      'gii' =>
        [
             'class' => 'yii\gii\Module',
-          
+
        ],
-       
+
         'debug' =>
       [
         'class' => 'yii\debug\Module',
       ],
-      'gridview' => 
-      [
-            'class' => 'kartik\grid\Module',
-      ],
-        'datecontrol' => 
+    
+        'datecontrol' =>
          [
             'class' => 'kartik\datecontrol\Module',
 
             // format settings for displaying each date attribute
-              'displaySettings' => 
+              'displaySettings' =>
                  [
                 'date' => 'd-m-Y',
                 'time' => 'H:i:s A',
@@ -39,9 +36,9 @@ return
                  ],
 
             // format settings for saving each date attribute
-            'saveSettings' => 
+            'saveSettings' =>
                [
-                'date' => 'Y-m-d', 
+                'date' => 'Y-m-d',
                 'time' => 'H:i:s',
                 'datetime' => 'Y-m-d H:i:s',
                 ],
@@ -53,10 +50,10 @@ return
             ],
 
 
-    
+
    ],
-            
-      
+
+
 'components' =>
   [
         'cache' =>
@@ -77,7 +74,7 @@ return
            [
             'class' => 'yii\swiftmailer\Mailer',
            ],
-            
+
 
 
     ],

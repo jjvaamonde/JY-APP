@@ -23,10 +23,10 @@ use yii\helpers\Html;
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+                        <span class="label label-success">6</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 4 messages</li>
+                        <li class="header">You have 6 messages</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -38,7 +38,7 @@ use yii\helpers\Html;
                                         </div>
                                         <h4>
                                             Support Team
-                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                            <small><i class="fa fa-clock-o"></i> 7 mins</small>
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
                                     </a>
@@ -51,7 +51,7 @@ use yii\helpers\Html;
                                                  alt="user image"/>
                                         </div>
                                         <h4>
-                                            AdminLTE Design Team
+                                            Ad Design Team
                                             <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
