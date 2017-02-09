@@ -1,4 +1,5 @@
 <?php
+
 return
 [
 
@@ -22,7 +23,7 @@ return
       [
         'class' => 'yii\debug\Module',
       ],
-    
+
         'datecontrol' =>
          [
             'class' => 'kartik\datecontrol\Module',
