@@ -15,10 +15,10 @@ use Yii;
  * @property string $Descripcion
  * @property string $DireccionVendedor
  * @property integer $Cantidad_Articulo
- * @property integer $Calificacion_Vendedor
+ * @property string $Calificacion_Vendedor
  * @property string $Fecha_Publicacion
  * @property string $Fecha_Caducidad
- * @property integer $CantImagen
+ * @property string $Imagen
  * @property integer $status_anuncio
  *
  * @property SubCategoria $subCategoria
@@ -30,6 +30,8 @@ use Yii;
  */
 class Anuncio extends \yii\db\ActiveRecord
 {
+  const STATUS_DELETED = 0;
+  const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
@@ -43,10 +45,13 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
+
         return [
-            [['Vendedor', 'Sub_Categoria', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'CantImagen', 'status_anuncio'], 'required'],
-            [['Vendedor', 'Sub_Categoria', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'Fecha_Caducidad', 'CantImagen', 'status_anuncio'], 'integer'],
-            [['Descripcion'], 'string'],
+            [['Vendedor', 'Sub_Categoria', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'Imagen', 'status_anuncio'], 'required'],
+            [['Vendedor', 'Sub_Categoria', 'Cantidad_Articulo', 'Fecha_Caducidad', 'status_anuncio'], 'integer'],
+            [['Descripcion', 'Imagen'], 'string'],
+            [['Calificacion_Vendedor'], 'number'],
             [['Fecha_Publicacion'], 'safe'],
             [['Titulo'], 'string', 'max' => 50],
             [['Clasificacion'], 'string', 'max' => 10],
@@ -55,6 +60,8 @@ class Anuncio extends \yii\db\ActiveRecord
             [['Sub_Categoria'], 'unique'],
             [['Sub_Categoria'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategoria::className(), 'targetAttribute' => ['Sub_Categoria' => 'sub_CategoriaID']],
             [['Vendedor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['Vendedor' => 'usuarioID']],
+            ['status_anuncio', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status_anuncio', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -75,7 +82,7 @@ class Anuncio extends \yii\db\ActiveRecord
             'Calificacion_Vendedor' => 'Calificacion  Vendedor',
             'Fecha_Publicacion' => 'Fecha  Publicacion',
             'Fecha_Caducidad' => 'Fecha  Caducidad',
-            'CantImagen' => 'Cant Imagen',
+            'Imagen' => 'Imagen',
             'status_anuncio' => 'Status Anuncio',
         ];
     }
