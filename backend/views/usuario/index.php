@@ -7,20 +7,20 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var backend\models\AuncioSearch $searchModel
+ * @var backend\models\UsuarioSearch $searchModel
  */
 
-$this->title = 'Anuncios';
+$this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anuncio-index">
+<div class="usuario-index">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php /* echo Html::a('Create Usuario', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
     <?php Pjax::begin(); echo GridView::widget([
@@ -29,26 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
-            'Titulo',
-            'Clasificacion',
-//            'Descripcion:ntext', 
-//            'DireccionVendedor', 
-//            'Cantidad_Articulo', 
-//            'Calificacion_Vendedor', 
-//            ['attribute' => 'Fecha_Publicacion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
-//            'Fecha_Caducidad', 
-//            'CantImagen', 
-//            'status_anuncio', 
+            'usuarioID',
+            'Rif_CI',
+            'Login',
+            'Clave',
+            'Nombre',
+//            'Direccion:ntext', 
+//            'Telefono', 
+//            'Correo_Electronico', 
+//            'auth_key', 
+//            'created_at', 
+//            'updated_at', 
+//            'password_hash', 
+//            'password_reset_token', 
+//            'Avatar', 
+//            'Calificacion', 
+//            'Puntos', 
+//            'Rol', 
+//            ['attribute' => 'Fecha_UltimaConexion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
+//            'Cod_Referido', 
+//            'paquete_PremiumID', 
+//            'premioID', 
+//            'publicidadID', 
+//            'reclamosID', 
+//            'status', 
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['anuncio/view', 'id' => $model->anuncioID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['usuario/view', 'id' => $model->usuarioID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }

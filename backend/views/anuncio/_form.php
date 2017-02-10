@@ -1,45 +1,57 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Anuncio */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var backend\models\Anuncio $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="anuncio-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
-    <?= $form->field($model, 'Vendedor')->textInput() ?>
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
 
-    <?= $form->field($model, 'Sub_Categoria')->textInput() ?>
+            'Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Vendedor...']],
 
-    <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true]) ?>
+            'Sub_Categoria' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Sub  Categoria...']],
 
-    <?= $form->field($model, 'Clasificacion')->textInput(['maxlength' => true]) ?>
+            'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Titulo...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Descripcion')->textarea(['rows' => 6]) ?>
+            'Clasificacion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Clasificacion...', 'maxlength' => 10]],
 
-    <?= $form->field($model, 'DireccionVendedor')->textInput(['maxlength' => true]) ?>
+            'Descripcion' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Enter Descripcion...','rows' => 6]],
 
-    <?= $form->field($model, 'Cantidad_Articulo')->textInput() ?>
+            'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Direccion Vendedor...', 'maxlength' => 255]],
 
-    <?= $form->field($model, 'Calificacion_Vendedor')->textInput() ?>
+            'Fecha_Publicacion' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
 
-    <?= $form->field($model, 'Fecha_Publicacion')->textInput() ?>
+            'Fecha_Caducidad' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Fecha  Caducidad...', 'maxlength' => 20]],
 
-    <?= $form->field($model, 'Fecha_Caducidad')->textInput(['maxlength' => true]) ?>
+            'CantImagen' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cant Imagen...']],
 
-    <?= $form->field($model, 'CantImagen')->textInput() ?>
+            'status_anuncio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Status Anuncio...']],
 
-    <?= $form->field($model, 'status_anuncio')->textInput() ?>
+            'Cantidad_Articulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cantidad  Articulo...']],
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+            'Calificacion_Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Calificacion  Vendedor...']],
 
-    <?php ActiveForm::end(); ?>
+        ]
+
+    ]);
+
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    );
+    ActiveForm::end(); ?>
 
 </div>

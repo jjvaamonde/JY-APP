@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Anuncio;
-use backend\models\AuncioSearch;
+use backend\models\Usuario;
+use backend\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnuncioController implements the CRUD actions for Anuncio model.
+ * UsuarioController implements the CRUD actions for Usuario model.
  */
-class AnuncioController extends Controller
+class UsuarioController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Lists all Anuncio models.
+     * Lists all Usuario models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AuncioSearch;
+        $searchModel = new UsuarioSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Displays a single Anuncio model.
+     * Displays a single Usuario model.
      * @param integer $id
      * @return mixed
      */
@@ -51,23 +51,23 @@ class AnuncioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+            return $this->redirect(['view', 'id' => $model->usuarioID]);
         } else {
             return $this->render('view', ['model' => $model]);
         }
     }
 
     /**
-     * Creates a new Anuncio model.
+     * Creates a new Usuario model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Anuncio;
+        $model = new Usuario;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+            return $this->redirect(['view', 'id' => $model->usuarioID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,7 +76,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Updates an existing Anuncio model.
+     * Updates an existing Usuario model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,7 +86,7 @@ class AnuncioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+            return $this->redirect(['view', 'id' => $model->usuarioID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -95,7 +95,7 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Deletes an existing Anuncio model.
+     * Deletes an existing Usuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,15 +108,15 @@ class AnuncioController extends Controller
     }
 
     /**
-     * Finds the Anuncio model based on its primary key value.
+     * Finds the Usuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Anuncio the loaded model
+     * @return Usuario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Anuncio::findOne($id)) !== null) {
+        if (($model = Usuario::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

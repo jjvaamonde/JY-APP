@@ -7,20 +7,20 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var backend\models\AuncioSearch $searchModel
+ * @var backend\models\ReclamoSearch $searchModel
  */
 
-$this->title = 'Anuncios';
+$this->title = 'Reclamos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anuncio-index">
+<div class="reclamos-index">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php /* echo Html::a('Create Reclamos', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
     <?php Pjax::begin(); echo GridView::widget([
@@ -29,26 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
-            'Titulo',
-            'Clasificacion',
-//            'Descripcion:ntext', 
-//            'DireccionVendedor', 
-//            'Cantidad_Articulo', 
-//            'Calificacion_Vendedor', 
-//            ['attribute' => 'Fecha_Publicacion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
-//            'Fecha_Caducidad', 
-//            'CantImagen', 
-//            'status_anuncio', 
+            'reclamosID',
+            'Usuario',
+            'Descripcion',
+            'Motivo',
+            ['attribute' => 'Fecha','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']],
+//            'Estado_reclamo', 
+//            'status', 
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['anuncio/view', 'id' => $model->anuncioID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['reclamo/view', 'id' => $model->reclamosID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }

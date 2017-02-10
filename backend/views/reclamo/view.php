@@ -6,14 +6,14 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var backend\models\Anuncio $model
+ * @var backend\models\Reclamos $model
  */
 
-$this->title = $model->anuncioID;
-$this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
+$this->title = $model->reclamosID;
+$this->params['breadcrumbs'][] = ['label' => 'Reclamos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anuncio-view">
+<div class="reclamos-view">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
@@ -29,34 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => DetailView::TYPE_INFO,
         ],
         'attributes' => [
-            'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
-            'Titulo',
-            'Clasificacion',
-            'Descripcion:ntext',
-            'DireccionVendedor',
-            'Cantidad_Articulo',
-            'Calificacion_Vendedor',
+            'reclamosID',
+            'Usuario',
+            'Descripcion',
+            'Motivo',
             [
-                'attribute' => 'Fecha_Publicacion',
+                'attribute' => 'Fecha',
                 'format' => [
-                    'date', (isset(Yii::$app->modules['datecontrol']['displaySettings']['date']))
-                        ? Yii::$app->modules['datecontrol']['displaySettings']['date']
-                        : 'd-m-Y'
+                    'datetime', (isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime']))
+                        ? Yii::$app->modules['datecontrol']['displaySettings']['datetime']
+                        : 'd-m-Y H:i:s A'
                 ],
                 'type' => DetailView::INPUT_WIDGET,
                 'widgetOptions' => [
                     'class' => DateControl::classname(),
-                    'type' => DateControl::FORMAT_DATE
+                    'type' => DateControl::FORMAT_DATETIME
                 ]
             ],
-            'Fecha_Caducidad',
-            'CantImagen',
-            'status_anuncio',
+            'Estado_reclamo',
+            'status',
         ],
         'deleteOptions' => [
-            'url' => ['delete', 'id' => $model->anuncioID],
+            'url' => ['delete', 'id' => $model->reclamosID],
         ],
         'enableEditMode' => true,
     ]) ?>

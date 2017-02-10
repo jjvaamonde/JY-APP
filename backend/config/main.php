@@ -12,9 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-          'gridview' => [
-              'class' => 'kartik\grid\Module',
-                      ],
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+        ],
                 ],
     'components' => [
         'request' => [

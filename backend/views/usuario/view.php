@@ -6,14 +6,14 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var backend\models\Anuncio $model
+ * @var backend\models\Usuario $model
  */
 
-$this->title = $model->anuncioID;
-$this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
+$this->title = $model->usuarioID;
+$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anuncio-view">
+<div class="usuario-view">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
@@ -29,17 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => DetailView::TYPE_INFO,
         ],
         'attributes' => [
-            'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
-            'Titulo',
-            'Clasificacion',
-            'Descripcion:ntext',
-            'DireccionVendedor',
-            'Cantidad_Articulo',
-            'Calificacion_Vendedor',
+            'usuarioID',
+            'Rif_CI',
+            'Login',
+            'Clave',
+            'Nombre',
+            'Direccion:ntext',
+            'Telefono',
+            'Correo_Electronico',
+            'auth_key',
+            'created_at',
+            'updated_at',
+            'password_hash',
+            'password_reset_token',
+            'Avatar',
+            'Calificacion',
+            'Puntos',
+            'Rol',
             [
-                'attribute' => 'Fecha_Publicacion',
+                'attribute' => 'Fecha_UltimaConexion',
                 'format' => [
                     'date', (isset(Yii::$app->modules['datecontrol']['displaySettings']['date']))
                         ? Yii::$app->modules['datecontrol']['displaySettings']['date']
@@ -51,12 +59,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type' => DateControl::FORMAT_DATE
                 ]
             ],
-            'Fecha_Caducidad',
-            'CantImagen',
-            'status_anuncio',
+            'Cod_Referido',
+            'paquete_PremiumID',
+            'premioID',
+            'publicidadID',
+            'reclamosID',
+            'status',
         ],
         'deleteOptions' => [
-            'url' => ['delete', 'id' => $model->anuncioID],
+            'url' => ['delete', 'id' => $model->usuarioID],
         ],
         'enableEditMode' => true,
     ]) ?>
