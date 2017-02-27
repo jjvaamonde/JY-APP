@@ -3,9 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\PremioSearch */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var app\models\PremioSearch $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="premio-search">
@@ -15,6 +17,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'premioID') ?>
+
     <?= $form->field($model, 'Nombre_Premio') ?>
 
     <?= $form->field($model, 'Descripcion_Premio') ?>
@@ -23,9 +27,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Duracion') ?>
 
-    <?= $form->field($model, 'Valor_Premio') ?>
+    <?php // echo $form->field($model, 'Valor_Premio') ?>
 
-    <?php // echo $form->field($model, 'premioID') ?>
+    <?php // echo $form->field($model, 'status_pre') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

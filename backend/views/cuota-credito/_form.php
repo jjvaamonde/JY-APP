@@ -1,29 +1,39 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\CuotaCredito */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var app\models\CuotaCredito $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="cuota-credito-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
-    <?= $form->field($model, 'Cod_Pago')->textInput() ?>
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
 
-    <?= $form->field($model, 'Monto_Cuota')->textInput() ?>
+            'Cod_Pago' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cod  Pago...']],
 
-    <?= $form->field($model, 'Fecha_Cuota')->textInput() ?>
+            'Monto_Cuota' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Monto  Cuota...']],
 
-    <?= $form->field($model, 'cuota_CreditoID')->textInput() ?>
+            'Fecha_Cuota' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+        ]
 
-    <?php ActiveForm::end(); ?>
+    ]);
+
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    );
+    ActiveForm::end(); ?>
 
 </div>

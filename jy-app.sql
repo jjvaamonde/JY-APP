@@ -17,10 +17,10 @@ CREATE TABLE `anuncio` (
   `Descripcion` longtext COLLATE utf8_unicode_ci NOT NULL,
   `DireccionVendedor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Cantidad_Articulo` int(11) NOT NULL DEFAULT '0',
-  `Calificacion_Vendedor` int(11) NOT NULL DEFAULT '0',
+  `Calificacion_Vendedor` decimal(11,0) NOT NULL DEFAULT '0',
   `Fecha_Publicacion` date NOT NULL,
   `Fecha_Caducidad` bigint(20) NOT NULL,
-  `CantImagen` int(50) NOT NULL,
+  `Imagen` text COLLATE utf8_unicode_ci NOT NULL,
   `status_anuncio` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -89,6 +89,14 @@ CREATE TABLE `categoria` (
   `Cantidad_SubCategoria` int(50) NOT NULL,
   `status_cate` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`categoriaID`, `Nombre_Categ`, `Descripcion_Cate`, `Cantidad_SubCategoria`, `status_cate`) VALUES
+(1, 'jjdasd', 'iiisdsd', 52, 1),
+(2, 'jjdasdfdfd', 'iiisdsddd', 52, 1);
 
 -- --------------------------------------------------------
 
@@ -430,7 +438,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'jose', 'SqdA7cF09Ii9MLg8Pj6iI4yly1X3mAgu', '$2y$13$qn5R0Qo360JycpFUJWv/euHUJa1Z/S0pgUrlTiesRSZK90.9aTb5a', NULL, 'jjvg_12@hotmail.com', 10, 1485826575, 1485826575);
+(1, 'jose', 'SqdA7cF09Ii9MLg8Pj6iI4yly1X3mAgu', '$2y$13$qn5R0Qo360JycpFUJWv/euHUJa1Z/S0pgUrlTiesRSZK90.9aTb5a', NULL, 'jjvg_12@hotmail.com', 1, 1485826575, 1485826575);
 
 -- --------------------------------------------------------
 
@@ -733,7 +741,7 @@ ALTER TABLE `anuncio`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `categoriaID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `categoriaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `cuota_credito`
 --

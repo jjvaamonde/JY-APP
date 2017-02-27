@@ -12,56 +12,37 @@ use app\models\Premio;
  */
 class PremioSearch extends Premio
 {
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
+            [['premioID', 'Duracion', 'Valor_Premio', 'status_pre'], 'integer'],
             [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio'], 'safe'],
-            [['Duracion', 'Valor_Premio', 'premioID'], 'integer'],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
         $query = Premio::find();
-
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
+            'premioID' => $this->premioID,
             'Duracion' => $this->Duracion,
             'Valor_Premio' => $this->Valor_Premio,
-            'premioID' => $this->premioID,
+            'status_pre' => $this->status_pre,
         ]);
 
         $query->andFilterWhere(['like', 'Nombre_Premio', $this->Nombre_Premio])

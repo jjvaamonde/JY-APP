@@ -32,9 +32,9 @@ class Premio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio', 'Duracion', 'Valor_Premio', 'premioID'], 'required'],
+            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio', 'Duracion', 'Valor_Premio'], 'required'],
             [['Duracion', 'Valor_Premio', 'premioID'], 'integer'],
-            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio'], 'string', 'max' => 50],
+            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio'], 'string', 'max' => 100],
         ];
     }
 
@@ -44,11 +44,11 @@ class Premio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre_Premio' => 'Nombre  Premio',
-            'Descripcion_Premio' => 'Descripcion  Premio',
-            'Tipo_Premio' => 'Tipo  Premio',
-            'Duracion' => 'Duracion',
-            'Valor_Premio' => 'Valor  Premio',
+            'Nombre_Premio' => 'Nombre del premio',
+            'Descripcion_Premio' => 'Descripción del premio',
+            'Tipo_Premio' => 'Tipo de premio',
+            'Duracion' => 'Duración (días)',
+            'Valor_Premio' => 'Valor del premio',
             'premioID' => 'Premio ID',
         ];
     }

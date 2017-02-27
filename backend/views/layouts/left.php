@@ -31,14 +31,18 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
-                    ['label' => 'Categoria', 
-                        'icon' => 'glyphicon glyphicon-copyright-mark', 
+                      ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
+                    ['label' => 'Categoria',
+                        'icon' => 'glyphicon glyphicon-copyright-mark',
                         'url' => ['/categoria'],
                         'items' => [
                             ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
                             ],
                         ],
+                    ['label' => 'Usuario', 'icon' => 'fa fa-file-code-o', 'url' => ['/usuario']],
                     ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
+                    ['label' => 'Premio', 'icon' => 'fa fa-file-code-o', 'url' => ['/premio']],
+                    ['label' => 'Cuota de Credito', 'icon' => 'fa fa-file-code-o', 'url' => ['/cuota-credito']],
                     ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
@@ -70,7 +74,7 @@
                     ],
                 ],
             ]
-         
+
         ) ?>
 
     </section>
