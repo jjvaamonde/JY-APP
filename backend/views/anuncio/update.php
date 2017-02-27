@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Anuncio */
+/**
+ * @var yii\web\View $this
+ * @var backend\models\Anuncio $model
+ */
 
-$this->title = 'Update Anuncio: ' . $model->anuncioID;
+$this->title = 'Update Anuncio: ' . ' ' . $model->anuncioID;
 $this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->anuncioID, 'url' => ['view', 'id' => $model->anuncioID]];
 $this->params['breadcrumbs'][] = 'Update';

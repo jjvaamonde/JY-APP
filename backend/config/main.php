@@ -1,4 +1,6 @@
 <?php
+use kartik\datecontrol\Module;
+use yii\jui\DatePicker;
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -12,9 +14,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-          'gridview' => [
-              'class' => 'kartik\grid\Module',
-                      ],
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+        ],
                 ],
     'components' => [
         'request' => [
@@ -51,5 +53,6 @@ return [
         */
     ],
     'params' => $params,
+    
 
 ];

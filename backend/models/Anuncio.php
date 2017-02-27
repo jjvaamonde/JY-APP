@@ -9,20 +9,18 @@ use Yii;
  *
  * @property integer $anuncioID
  * @property integer $Vendedor
- * @property integer $Sub_Categoria
+ * @property integer $Sub_categoria
  * @property string $Titulo
  * @property string $Clasificacion
  * @property string $Descripcion
  * @property string $DireccionVendedor
  * @property integer $Cantidad_Articulo
- * @property integer $Calificacion_Vendedor
+ * @property string $Calificacion_Vendedor
  * @property string $Fecha_Publicacion
  * @property string $Fecha_Caducidad
- * @property integer $CantImagen
+ * @property string $Imagen
  * @property integer $status_anuncio
  *
- * @property SubCategoria $subCategoria
- * @property Usuario $vendedor
  * @property ImagenAnuncio[] $imagenAnuncios
  * @property JoinanunciototipoAnuncio[] $joinanunciototipoAnuncios
  * @property Joinanunciotousuario[] $joinanunciotousuarios
@@ -44,17 +42,14 @@ class Anuncio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Vendedor', 'Sub_Categoria', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'CantImagen', 'status_anuncio'], 'required'],
-            [['Vendedor', 'Sub_Categoria', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'Fecha_Caducidad', 'CantImagen', 'status_anuncio'], 'integer'],
-            [['Descripcion'], 'string'],
+            [['Vendedor', 'Sub_categoria', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'Imagen'], 'required'],
+            [['Vendedor', 'Sub_categoria', 'Cantidad_Articulo', 'Fecha_Caducidad', 'status_anuncio'], 'integer'],
+            [['Descripcion', 'Imagen'], 'string'],
+            [['Calificacion_Vendedor'], 'number'],
             [['Fecha_Publicacion'], 'safe'],
             [['Titulo'], 'string', 'max' => 50],
             [['Clasificacion'], 'string', 'max' => 10],
             [['DireccionVendedor'], 'string', 'max' => 255],
-            [['Vendedor'], 'unique'],
-            [['Sub_Categoria'], 'unique'],
-            [['Sub_Categoria'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategoria::className(), 'targetAttribute' => ['Sub_Categoria' => 'sub_CategoriaID']],
-            [['Vendedor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['Vendedor' => 'usuarioID']],
         ];
     }
 
@@ -66,7 +61,7 @@ class Anuncio extends \yii\db\ActiveRecord
         return [
             'anuncioID' => 'Anuncio ID',
             'Vendedor' => 'Vendedor',
-            'Sub_Categoria' => 'Sub  Categoria',
+            'Sub_categoria' => 'Sub Categoria',
             'Titulo' => 'Titulo',
             'Clasificacion' => 'Clasificacion',
             'Descripcion' => 'Descripcion',
@@ -75,25 +70,9 @@ class Anuncio extends \yii\db\ActiveRecord
             'Calificacion_Vendedor' => 'Calificacion  Vendedor',
             'Fecha_Publicacion' => 'Fecha  Publicacion',
             'Fecha_Caducidad' => 'Fecha  Caducidad',
-            'CantImagen' => 'Cant Imagen',
+            'Imagen' => 'Imagen',
             'status_anuncio' => 'Status Anuncio',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSubCategoria()
-    {
-        return $this->hasOne(SubCategoria::className(), ['sub_CategoriaID' => 'Sub_Categoria']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVendedor()
-    {
-        return $this->hasOne(Usuario::className(), ['usuarioID' => 'Vendedor']);
     }
 
     /**

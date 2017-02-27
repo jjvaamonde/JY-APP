@@ -1,45 +1,66 @@
 <?php
-
+// 0416-6543587 numero Johana
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use kartik\datecontrol\DateControl;
+use kartik\widgets\FileInput;
+use kartik\widgets\TypeaheadBasic;
+use kartik\widgets\TouchSpin;
+use yii\helpers\Url;
+/**
+ * @var yii\web\View $this
+ * @var backend\models\Anuncio $model
+ * @var yii\widgets\ActiveForm $form
+ */
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Anuncio */
-/* @var $form yii\widgets\ActiveForm */
-?>
+
+ ?>
+
 
 <div class="anuncio-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
-    <?= $form->field($model, 'Vendedor')->textInput() ?>
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
 
-    <?= $form->field($model, 'Sub_Categoria')->textInput() ?>
+            'Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Vendedor...']],
 
-    <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true]) ?>
+            'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Direccion Vendedor...', 'maxlength' => 255]],
 
-    <?= $form->field($model, 'Clasificacion')->textInput(['maxlength' => true]) ?>
+            'Clasificacion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Clasificacion...', 'maxlength' => 10]],
 
-    <?= $form->field($model, 'Descripcion')->textarea(['rows' => 6]) ?>
+            'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Titulo...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'DireccionVendedor')->textInput(['maxlength' => true]) ?>
+            'Sub_categoria' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Seleccione Sub Categoria...']],
 
-    <?= $form->field($model, 'Cantidad_Articulo')->textInput() ?>
+            'Descripcion' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Ingrese  Descripcion...','rows' => 6]],
 
-    <?= $form->field($model, 'Calificacion_Vendedor')->textInput() ?>
+            'Fecha_Publicacion' =>['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]
+          ],
 
-    <?= $form->field($model, 'Fecha_Publicacion')->textInput() ?>
+            'Fecha_Caducidad' => ['type' => Form::INPUT_TEXT,'options'=>['placeholder' => 'Ingrese  los dias de vigencia' ]],
 
-    <?= $form->field($model, 'Fecha_Caducidad')->textInput(['maxlength' => true]) ?>
+            'Imagen[]' => ['type' =>Form::INPUT_WIDGET, 'widgetClass' =>  FileInput::classname()],
 
-    <?= $form->field($model, 'CantImagen')->textInput() ?>
+            'Cantidad_Articulo' => ['type' =>  Form::INPUT_WIDGET, 'widgetClass' => TouchSpin::classname(),'pluginOptions' => [
+                'placeholder' => 'Ingrese la Cantidad de Articulos disponibles...',
+                'buttonup_class' => 'btn btn-primary',
+                'buttondown_class' => 'btn btn-info',
+                'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>',
+                'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>']]
+              ],
 
-    <?= $form->field($model, 'status_anuncio')->textInput() ?>
+    ]); 
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    );
+    ActiveForm::end(); ?>
 
 </div>

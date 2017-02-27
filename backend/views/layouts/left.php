@@ -31,8 +31,9 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
-                    ['label' => 'Categoria', 
-                        'icon' => 'glyphicon glyphicon-copyright-mark', 
+                      ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
+                    ['label' => 'Categoria',
+                        'icon' => 'glyphicon glyphicon-copyright-mark',
                         'url' => ['/categoria'],
                         'items' => [
                             ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
@@ -70,7 +71,7 @@
                     ],
                 ],
             ]
-         
+
         ) ?>
 
     </section>

@@ -3,26 +3,32 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\AuncioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+
+/**
+ * @var yii\web\View $this
+ * @var yii\data\ActiveDataProvider $dataProvider
+ * @var backend\models\AuncioSearch $searchModel
+ */
 
 $this->title = 'Anuncios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anuncio-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
+    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a('Crear nuevo Anuncio', ['create'], ['class' => 'btn btn-success'])  ?>
     </p>
-<?php Pjax::begin(); ?>    <?= ListView::widget([
+
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {
             return Html::a(Html::encode($model->anuncioID), ['view', 'id' => $model->anuncioID]);
         },
     ]) ?>
-<?php Pjax::end(); ?></div>
+
+</div>
