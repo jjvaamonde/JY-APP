@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'attributes' => [
             'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
+            'usuarioID',
+            'sub_categoriaID',
             'Titulo',
             'Clasificacion',
             'Descripcion:ntext',
@@ -51,8 +51,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type' => DateControl::FORMAT_DATE
                 ]
             ],
-            'Fecha_Caducidad',
-            'CantImagen',
+            [
+                'attribute' => 'Fecha_Caducidad',
+                'format' => [
+                    'date', (isset(Yii::$app->modules['datecontrol']['displaySettings']['date']))
+                        ? Yii::$app->modules['datecontrol']['displaySettings']['date']
+                        : 'd-m-Y'
+                ],
+                'type' => DetailView::INPUT_WIDGET,
+                'widgetOptions' => [
+                    'class' => DateControl::classname(),
+                    'type' => DateControl::FORMAT_DATE
+                ]
+            ],
+            'categoriaID',
             'status_anuncio',
         ],
         'deleteOptions' => [

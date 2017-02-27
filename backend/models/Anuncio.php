@@ -8,30 +8,25 @@ use Yii;
  * This is the model class for table "anuncio".
  *
  * @property integer $anuncioID
- * @property integer $Vendedor
- * @property integer $Sub_Categoria
+ * @property integer $usuarioID
+ * @property integer $sub_categoriaID
  * @property string $Titulo
  * @property string $Clasificacion
  * @property string $Descripcion
  * @property string $DireccionVendedor
  * @property integer $Cantidad_Articulo
- * @property string $Calificacion_Vendedor
+ * @property integer $Calificacion_Vendedor
  * @property string $Fecha_Publicacion
  * @property string $Fecha_Caducidad
- * @property string $Imagen
+ * @property integer $categoriaID
  * @property integer $status_anuncio
  *
- * @property SubCategoria $subCategoria
- * @property Usuario $vendedor
- * @property ImagenAnuncio[] $imagenAnuncios
  * @property JoinanunciototipoAnuncio[] $joinanunciototipoAnuncios
  * @property Joinanunciotousuario[] $joinanunciotousuarios
  * @property JoinsubCategoriatoanuncio[] $joinsubCategoriatoanuncios
  */
 class Anuncio extends \yii\db\ActiveRecord
 {
-  const STATUS_DELETED = 0;
-  const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
@@ -45,23 +40,14 @@ class Anuncio extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-
-
         return [
-            [['Vendedor', 'Sub_Categoria', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'Imagen', 'status_anuncio'], 'required'],
-            [['Vendedor', 'Sub_Categoria', 'Cantidad_Articulo', 'Fecha_Caducidad', 'status_anuncio'], 'integer'],
-            [['Descripcion', 'Imagen'], 'string'],
-            [['Calificacion_Vendedor'], 'number'],
-            [['Fecha_Publicacion'], 'safe'],
+            [['usuarioID', 'sub_categoriaID', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'categoriaID',], 'required'],
+            [['usuarioID', 'sub_categoriaID', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'categoriaID', 'status_anuncio'], 'integer'],
+            [['Descripcion'], 'string'],
+            [['Fecha_Publicacion', 'Fecha_Caducidad'], 'safe'],
             [['Titulo'], 'string', 'max' => 50],
             [['Clasificacion'], 'string', 'max' => 10],
             [['DireccionVendedor'], 'string', 'max' => 255],
-            [['Vendedor'], 'unique'],
-            [['Sub_Categoria'], 'unique'],
-            [['Sub_Categoria'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategoria::className(), 'targetAttribute' => ['Sub_Categoria' => 'sub_CategoriaID']],
-            [['Vendedor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['Vendedor' => 'usuarioID']],
-            ['status_anuncio', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status_anuncio', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -72,8 +58,8 @@ class Anuncio extends \yii\db\ActiveRecord
     {
         return [
             'anuncioID' => 'Anuncio ID',
-            'Vendedor' => 'Vendedor',
-            'Sub_Categoria' => 'Sub  Categoria',
+            'usuarioID' => 'Usuario ID',
+            'sub_categoriaID' => 'Sub Categoria ID',
             'Titulo' => 'Titulo',
             'Clasificacion' => 'Clasificacion',
             'Descripcion' => 'Descripcion',
@@ -82,33 +68,9 @@ class Anuncio extends \yii\db\ActiveRecord
             'Calificacion_Vendedor' => 'Calificacion  Vendedor',
             'Fecha_Publicacion' => 'Fecha  Publicacion',
             'Fecha_Caducidad' => 'Fecha  Caducidad',
-            'Imagen' => 'Imagen',
+            'categoriaID' => 'Categoria ID',
             'status_anuncio' => 'Status Anuncio',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSubCategoria()
-    {
-        return $this->hasOne(SubCategoria::className(), ['sub_CategoriaID' => 'Sub_Categoria']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVendedor()
-    {
-        return $this->hasOne(Usuario::className(), ['usuarioID' => 'Vendedor']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImagenAnuncios()
-    {
-        return $this->hasMany(ImagenAnuncio::className(), ['AnuncioId' => 'anuncioID']);
     }
 
     /**

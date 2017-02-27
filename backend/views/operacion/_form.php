@@ -7,7 +7,7 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Operacion $model
+ * @var backend\models\Operacion $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>

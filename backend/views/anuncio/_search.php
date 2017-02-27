@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var backend\models\AuncioSearch $model
+ * @var backend\models\AnuncioSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -19,9 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'anuncioID') ?>
 
-    <?= $form->field($model, 'Vendedor') ?>
+    <?= $form->field($model, 'usuarioID') ?>
 
-    <?= $form->field($model, 'Sub_Categoria') ?>
+    <?= $form->field($model, 'sub_categoriaID') ?>
 
     <?= $form->field($model, 'Titulo') ?>
 
@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'Fecha_Caducidad') ?>
 
-    <?php // echo $form->field($model, 'CantImagen') ?>
+    <?php // echo $form->field($model, 'categoriaID') ?>
 
     <?php // echo $form->field($model, 'status_anuncio') ?>
 

@@ -7,20 +7,20 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var backend\models\OperacionSearch $searchModel
+ * @var backend\models\SubCategoriaSearch $searchModel
  */
 
-$this->title = 'Operacions';
+$this->title = 'Sub Categorias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="operacion-index">
+<div class="sub-categoria-index">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Operacion', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php /* echo Html::a('Create Sub Categoria', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
     <?php Pjax::begin(); echo GridView::widget([
@@ -29,15 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'operacionID',
-            'nombre_op',
+            'sub_CategoriaID',
+            'categoriaID',
+            'Nombre_SubCat',
+            'Descripcion_Subcat',
+            'status_sub',
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['operacion/view', 'id' => $model->operacionID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['sub-categoria/view', 'id' => $model->sub_CategoriaID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }

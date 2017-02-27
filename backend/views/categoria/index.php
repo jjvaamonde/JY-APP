@@ -1,24 +1,29 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\CategoriaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+
+/**
+ * @var yii\web\View $this
+ * @var yii\data\ActiveDataProvider $dataProvider
+ * @var backend\models\CategoriaSearch $searchModel
+ */
 
 $this->title = 'Categorias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categoria-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Categoria', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php /* echo Html::a('Create Categoria', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+
+    <?php Pjax::begin(); echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -28,9 +33,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'Nombre_Categ',
             'Descripcion_Cate',
             'Cantidad_SubCategoria',
-           // 'status_cate',
-             
-            ['class' => 'yii\grid\ActionColumn'],
+            'status_cate',
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+                            Yii::$app->urlManager->createUrl(['categoria/view', 'id' => $model->categoriaID, 'edit' => 't']),
+                            ['title' => Yii::t('yii', 'Edit'),]
+                        );
+                    }
+                ],
+            ],
         ],
-    ]); ?>
-<?php Pjax::end(); ?></div>
+        'responsive' => true,
+        'hover' => true,
+        'condensed' => true,
+        'floatHeader' => true,
+
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
+            'type' => 'info',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
+            'showFooter' => false
+        ],
+    ]); Pjax::end(); ?>
+
+</div>

@@ -8,8 +8,7 @@ use backend\models\SubCategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use kartik\dialog\Dialog;
-use yii\web\JsExpression;
+
 /**
  * SubCategoriaController implements the CRUD actions for SubCategoria model.
  */
@@ -67,16 +66,8 @@ class SubCategoriaController extends Controller
     {
         $model = new SubCategoria;
 
-        if ($model->load(Yii::$app->request->post()))
-        {
-          $model->status_sub =='1';
-          if($model->save())
-          {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->sub_CategoriaID]);
-          }else {
-            # code...
-            print_r($model->getErrors());
-          }
         } else {
             return $this->render('create', [
                 'model' => $model,

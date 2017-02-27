@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Rol;
 use backend\models\RolSearch;
-use backend\models\Operacion;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,21 +64,16 @@ class RolController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Rol();
-        $tipoOperaciones = Operacion::find()->all();
-     
+        $model = new Rol;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->rol_ID]);
         } else {
-        return $this->render('create', [
-            'model' => $model,
-            'tipoOperaciones' => $tipoOperaciones
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
-
-    }
-
-    
 
     /**
      * Updates an existing Rol model.
@@ -87,31 +81,17 @@ class RolController extends Controller
      * @param integer $id
      * @return mixed
      */
-        public function actionUpdate($id)
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $tipoOperaciones = Operacion::find()->all();
-     
-        $model->operaciones = \yii\helpers\ArrayHelper::getColumn(
-        $model->getRolOperaciones()->asArray()->all(),
-        'operacion_id'
-    );
- 
-    if ($model->load(Yii::$app->request->post())) {
-        if (!isset($_POST['Rol']['operaciones'])) {
-            $model->operaciones = [];
-        }
-        if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-    } else {
-        return $this->render('update', [
-            'model' => $model,
-            'tipoOperaciones' => $tipoOperaciones
-        ]);
-    }
 
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->rol_ID]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

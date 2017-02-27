@@ -15,7 +15,7 @@ class SubCategoriaSearch extends SubCategoria
     public function rules()
     {
         return [
-            [['sub_CategoriaID', 'Cod_Categoria', 'status_sub'], 'integer'],
+            [['sub_CategoriaID', 'categoriaID', 'status_sub'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class SubCategoriaSearch extends SubCategoria
 
         $query->andFilterWhere([
             'sub_CategoriaID' => $this->sub_CategoriaID,
-            'Cod_Categoria' => $this->Cod_Categoria,
+            'categoriaID' => $this->categoriaID,
             'status_sub' => $this->status_sub,
         ]);
 

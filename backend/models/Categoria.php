@@ -17,8 +17,6 @@ use Yii;
  */
 class Categoria extends \yii\db\ActiveRecord
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
@@ -36,8 +34,6 @@ class Categoria extends \yii\db\ActiveRecord
             [['Nombre_Categ', 'Descripcion_Cate', 'Cantidad_SubCategoria', 'status_cate'], 'required'],
             [['Cantidad_SubCategoria', 'status_cate'], 'integer'],
             [['Nombre_Categ', 'Descripcion_Cate'], 'string', 'max' => 50],
-            ['status_cate', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status_cate', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -47,11 +43,11 @@ class Categoria extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'categoriaID' => 'Codigo Categoria',
-            'Nombre_Categ' => 'Nombre ',
-            'Descripcion_Cate' => 'Descripcion ',
-            'Cantidad_SubCategoria' => 'Cantidad  de Sub Categorias',
-            'status_cate' => 'Estado Categoria',
+            'categoriaID' => 'Categoria ID',
+            'Nombre_Categ' => 'Nombre  Categ',
+            'Descripcion_Cate' => 'Descripcion  Cate',
+            'Cantidad_SubCategoria' => 'Cantidad  Sub Categoria',
+            'status_cate' => 'Status Cate',
         ];
     }
 

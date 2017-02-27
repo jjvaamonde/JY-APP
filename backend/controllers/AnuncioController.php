@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Anuncio;
-use backend\models\AuncioSearch;
+use backend\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class AnuncioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuncioSearch;
+        $searchModel = new AnuncioSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
@@ -65,18 +65,10 @@ class AnuncioController extends Controller
     public function actionCreate()
     {
         $model = new Anuncio;
-      
-        if ($model->load(Yii::$app->request->post()))
-         {
 
-           $model->status_anuncio= 1;
-           if($model->save())
-           {
-             return $this->redirect(['view', 'id' => $model->anuncioID]);
-           }else{
-               print_r($model->getErrors());
-             }
-           } else {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
+        } else {
             return $this->render('create', [
                 'model' => $model,
             ]);

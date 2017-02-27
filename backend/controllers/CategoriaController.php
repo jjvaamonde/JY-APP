@@ -14,16 +14,13 @@ use yii\filters\VerbFilter;
  */
 class CategoriaController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,12 +32,12 @@ class CategoriaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new CategoriaSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -51,9 +48,13 @@ class CategoriaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->categoriaID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -63,18 +64,10 @@ class CategoriaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Categoria();
-      //  if ($model->load(Yii::$app->request->post()) && $model->validate())
-        if ($model->load(Yii::$app->request->post()))
-        {
-            $model->status_cate='1';
-            if($model->save())
-            {
-                return $this->redirect(['view', 'id' => $model->categoriaID]);
-            }else
+        $model = new Categoria;
 
-                print_r($model->getErrors());
-          //return $this->redirect(['view', 'id' => $model->categoriaID]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->categoriaID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
