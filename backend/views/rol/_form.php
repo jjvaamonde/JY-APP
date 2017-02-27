@@ -9,7 +9,9 @@ use kartik\datecontrol\DateControl;
  * @var yii\web\View $this
  * @var backend\models\Rol $model
  * @var yii\widgets\ActiveForm $form
+*
  */
+ 
 ?>
 
 <div class="rol-form">
@@ -26,15 +28,15 @@ use kartik\datecontrol\DateControl;
         ]
 
     ]);
-
+    $opciones = \yii\helpers\ArrayHelper::map($tipoOperaciones, 'operacion_ID', 'nombre_op');
+    echo $form->field($model, 'operaciones')->checkboxList($opciones, ['unselect'=>NULL]);
     echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
         ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
     );
+    
     ActiveForm::end(); ?>
-    <?php
-    $opciones = \yii\helpers\ArrayHelper::map($tipoOperaciones, 'id', 'nombre');
-    echo $form->field($model, 'operaciones')->checkboxList($opciones, ['unselect'=>NULL]);
-    ?>
+    
+  
 
 
 </div>
