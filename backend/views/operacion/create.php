@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Operacion $model
+ * @var backend\models\Operacion $model
  */
 
 $this->title = 'Create Operacion';

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use backend\models\Rol;
+
 /**
  * @var yii\web\View $this
  * @var backend\models\Rol $model
@@ -16,12 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?= $this->render('_form', [
- 
-	'model' => $model,
-	 
-	'tipoOperaciones' => $tipoOperaciones
-	 
-	]) ?>
-
+        'model' => $model,
+    ]) ?>
 
 </div>

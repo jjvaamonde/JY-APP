@@ -235,4 +235,9 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasOne(VentasUsuario::className(), ['Vendedor' => 'usuarioID']);
     }
+    public function getRol()
+    {
+            return $this->hasOne(Rol::className(), ['id' => 'rol_id']);
+    }
+
 }
