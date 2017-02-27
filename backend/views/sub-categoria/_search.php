@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\SubCategoriaSearch $model
- * @var yii\widgets\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\SubCategoriaSearch */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="sub-categoria-search">
@@ -26,7 +24,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'Descripcion_Subcat') ?>
 
     <?= $form->field($model, 'status_sub') ?>
-
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
