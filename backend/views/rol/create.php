@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use backend\models\Rol;
 /**
  * @var yii\web\View $this
  * @var backend\models\Rol $model

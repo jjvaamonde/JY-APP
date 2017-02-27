@@ -79,7 +79,7 @@ class RolController extends Controller
 
     }
 
-    }
+    
 
     /**
      * Updates an existing Rol model.
@@ -87,7 +87,7 @@ class RolController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+        public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         $tipoOperaciones = Operacion::find()->all();
