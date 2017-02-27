@@ -7,20 +7,20 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var backend\models\SubCategoriaSearch $searchModel
+ * @var backend\models\RolSearch $searchModel
  */
 
-$this->title = 'Sub Categorias';
+$this->title = 'Rols';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sub-categoria-index">
+<div class="rol-index">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
-    <?php  $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Sub Categoria', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php /* echo Html::a('Create Rol', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
     <?php Pjax::begin(); echo GridView::widget([
@@ -29,18 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'sub_CategoriaID',
-            'Cod_Categoria',
-            'Nombre_SubCat',
-            'Descripcion_Subcat',
-            'status_sub',
+            'rol_ID',
+            'nombre_rol',
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['sub-categoria/view', 'id' => $model->sub_CategoriaID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['rol/view', 'id' => $model->rol_ID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }
@@ -55,8 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
             'type' => 'info',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Nueva', ['create'], ['class' => 'btn btn-success']),
-            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reiniciar Lista', ['index'], ['class' => 'btn btn-info']),
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
             'showFooter' => false
         ],
     ]); Pjax::end(); ?>

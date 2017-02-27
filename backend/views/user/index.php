@@ -7,20 +7,20 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var app\models\CuotaCreditoSearch $searchModel
+ * @var common\models\UserSearch $searchModel
  */
 
-$this->title = 'Cuota Creditos';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cuota-credito-index">
+<div class="user-index">
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Cuota Credito', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php /* echo Html::a('Create User', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
     <?php Pjax::begin(); echo GridView::widget([
@@ -29,18 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'cuota_CreditoID',
-            'Cod_Pago',
-            'Monto_Cuota',
-            ['attribute' => 'Fecha_Cuota','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']],
-            'status_cuota',
+            'usuarioID',
+            'Rif_CI',
+            'Login',
+            'Clave',
+            'Nombre',
+//            'Direccion:ntext', 
+//            'Telefono', 
+//            'Correo_Electronico', 
+//            'auth_key', 
+//            'created_at', 
+//            'updated_at', 
+//            'password_hash', 
+//            'password_reset_token', 
+//            'Avatar', 
+//            'Calificacion', 
+//            'Puntos', 
+//            'rol_id', 
+//            ['attribute' => 'Fecha_UltimaConexion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
+//            'Cod_Referido', 
+//            'paquete_PremiumID', 
+//            'premioID', 
+//            'publicidadID', 
+//            'reclamosID', 
+//            'status', 
 
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['cuota-credito/view', 'id' => $model->cuota_CreditoID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['user/view', 'id' => $model->usuarioID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }

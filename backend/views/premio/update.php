@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Premio */
+/**
+ * @var yii\web\View $this
+ * @var app\models\Premio $model
+ */
 
-$this->title = 'Update Premio: ' . $model->premioID;
+$this->title = 'Update Premio: ' . ' ' . $model->premioID;
 $this->params['breadcrumbs'][] = ['label' => 'Premios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->premioID, 'url' => ['view', 'id' => $model->premioID]];
 $this->params['breadcrumbs'][] = 'Update';

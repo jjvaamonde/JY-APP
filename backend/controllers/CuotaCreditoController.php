@@ -14,16 +14,13 @@ use yii\filters\VerbFilter;
  */
 class CuotaCreditoController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,12 +32,12 @@ class CuotaCreditoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CuotaCreditoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new CuotaCreditoSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -51,9 +48,13 @@ class CuotaCreditoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->cuota_CreditoID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -63,11 +64,18 @@ class CuotaCreditoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CuotaCredito();
+        $model = new CuotaCredito;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->status_cuota='1';
+            if($model->save()){
             return $this->redirect(['view', 'id' => $model->cuota_CreditoID]);
         } else {
+             # code...
+            print_r($model->getErrors());
+          }
+      }
+          else{
             return $this->render('create', [
                 'model' => $model,
             ]);
