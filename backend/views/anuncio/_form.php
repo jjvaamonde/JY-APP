@@ -1,17 +1,22 @@
 <?php
-
+// 0416-6543587 numero Johana
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use kartik\datecontrol\DateControl;
 use kartik\widgets\FileInput;
-use kartik\widgets\StarRating;
+use kartik\widgets\TypeaheadBasic;
+use kartik\widgets\TouchSpin;
+use yii\helpers\Url;
 /**
  * @var yii\web\View $this
  * @var backend\models\Anuncio $model
  * @var yii\widgets\ActiveForm $form
  */
-?>
+
+
+ ?>
+
 
 <div class="anuncio-form">
 
@@ -22,34 +27,34 @@ use kartik\widgets\StarRating;
         'columns' => 1,
         'attributes' => [
 
-            'Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => ' Vendedor...']],
+            'Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Vendedor...']],
 
-            'Sub_Categoria' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Seleccione una Sub  Categoria...']],
+            'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Direccion Vendedor...', 'maxlength' => 255]],
 
-            'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Titulo...', 'maxlength' => 50]],
+            'Clasificacion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Clasificacion...', 'maxlength' => 10]],
 
-            'Clasificacion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Ingrese Clasificacion...', 'maxlength' => 10]],
+            'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Titulo...', 'maxlength' => 50]],
 
-            'Descripcion' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Enter Descripcion...','rows' => 6]],
+            'Sub_categoria' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Seleccione Sub Categoria...']],
 
-            'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Direccion Vendedor...', 'maxlength' => 255]],
+            'Descripcion' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Ingrese  Descripcion...','rows' => 6]],
 
-            'Fecha_Publicacion' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
+            'Fecha_Publicacion' =>['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]
+          ],
 
-            'Fecha_Caducidad' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Fecha  Caducidad...', 'maxlength' => 20]],
+            'Fecha_Caducidad' => ['type' => Form::INPUT_TEXT,'options'=>['placeholder' => 'Ingrese  los dias de vigencia' ]],
 
-            'Cantidad_Articulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cantidad  Articulo...']],
+            'Imagen[]' => ['type' =>Form::INPUT_WIDGET, 'widgetClass' =>  FileInput::classname()],
 
-            'Imagen' => ['type' =>Form::INPUT_WIDGET, 'widgetClass' => FileInput::classname(),
-                  'pluginOptions' => ['previewFileType' => 'any']],
+            'Cantidad_Articulo' => ['type' =>  Form::INPUT_WIDGET, 'widgetClass' => TouchSpin::classname(),'pluginOptions' => [
+                'placeholder' => 'Ingrese la Cantidad de Articulos disponibles...',
+                'buttonup_class' => 'btn btn-primary',
+                'buttondown_class' => 'btn btn-info',
+                'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>',
+                'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>']]
+              ],
 
-            'Calificacion_Vendedor' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => StarRating::classname(),
-            'pluginOptions' => [
-                'theme' => 'krajee-uni',
-                'filledStar' => '&#x2605;',
-                'emptyStar' => '&#x2606;'] ],
-              ]
-]);
+    ]); 
 
 
 

@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'anuncioID',
             'Vendedor',
-            'Sub_Categoria',
+            'Sub_categoria',
             'Titulo',
             'Clasificacion',
             'Descripcion:ntext',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'Fecha_Caducidad',
-            'CantImagen',
+            'Imagen:ntext',
             'status_anuncio',
         ],
         'deleteOptions' => [

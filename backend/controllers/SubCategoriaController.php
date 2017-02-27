@@ -5,26 +5,23 @@ namespace backend\controllers;
 use Yii;
 use backend\models\SubCategoria;
 use backend\models\SubCategoriaSearch;
-use backend\models\Categoria;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use kartik\dialog\Dialog;
+use yii\web\JsExpression;
 /**
  * SubCategoriaController implements the CRUD actions for SubCategoria model.
  */
 class SubCategoriaController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -36,12 +33,12 @@ class SubCategoriaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SubCategoriaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new SubCategoriaSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -52,9 +49,13 @@ class SubCategoriaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->sub_CategoriaID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -64,10 +65,18 @@ class SubCategoriaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new SubCategoria();
+        $model = new SubCategoria;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()))
+        {
+          $model->status_sub =='1';
+          if($model->save())
+          {
             return $this->redirect(['view', 'id' => $model->sub_CategoriaID]);
+          }else {
+            # code...
+            print_r($model->getErrors());
+          }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -122,9 +131,4 @@ class SubCategoriaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    public static function getListaCate()
-{
-    $opciones = Categoria::find()->asArray()->all();
-    return ArrayHelper::map($opciones, 'categoriaID', 'Nombre_Categ');
-}
 }

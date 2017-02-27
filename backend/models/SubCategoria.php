@@ -13,7 +13,6 @@ use Yii;
  * @property string $Descripcion_Subcat
  * @property integer $status_sub
  *
- * @property Anuncio $anuncio
  * @property JoinsubCategoriatoanuncio[] $joinsubCategoriatoanuncios
  * @property JoinsubCategoriatocategoria[] $joinsubCategoriatocategorias
  */
@@ -36,7 +35,6 @@ class SubCategoria extends \yii\db\ActiveRecord
             [['Cod_Categoria', 'Nombre_SubCat', 'Descripcion_Subcat', 'status_sub'], 'required'],
             [['Cod_Categoria', 'status_sub'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'string', 'max' => 50],
-            [['Cod_Categoria'], 'unique'],
         ];
     }
 
@@ -46,20 +44,12 @@ class SubCategoria extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'sub_CategoriaID' => 'Sub  Categoria ID',
-            'Cod_Categoria' => 'Cod  Categoria',
-            'Nombre_SubCat' => 'Nombre  Sub Cat',
-            'Descripcion_Subcat' => 'Descripcion  Subcat',
+            'sub_CategoriaID' => 'Sub Categoria ID',
+            'Cod_Categoria' => 'Categoria',
+            'Nombre_SubCat' => 'Nombre Sub Categoria',
+            'Descripcion_Subcat' => 'Descripcion Sub Categoria',
             'status_sub' => 'Status Sub',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAnuncio()
-    {
-        return $this->hasOne(Anuncio::className(), ['Sub_Categoria' => 'sub_CategoriaID']);
     }
 
     /**
