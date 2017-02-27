@@ -35,7 +35,7 @@ return
 
          'pluginOptions'=>
 
-          [ 'multiple'=>true,
+          [ 'multiple'=>false,
             'browseClass' => 'btn btn-success',
             'uploadClass' => 'btn btn-info',
             'removeClass' => 'btn btn-danger',
