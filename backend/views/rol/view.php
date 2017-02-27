@@ -37,5 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'enableEditMode' => true,
     ]) ?>
+    
+    <h2>Operaciones Permitidas</h2>
+ 
+        <?php
+         
+        foreach ($model->operacionesPermitidasList as $operacionPermitida) {
+            echo $operacionPermitida['nombre'] . "
+        ";
+        }
+         
+        ?>
 
 </div>

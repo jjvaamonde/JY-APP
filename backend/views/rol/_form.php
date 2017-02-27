@@ -31,5 +31,10 @@ use kartik\datecontrol\DateControl;
         ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
     );
     ActiveForm::end(); ?>
+    <?php
+    $opciones = \yii\helpers\ArrayHelper::map($tipoOperaciones, 'id', 'nombre');
+    echo $form->field($model, 'operaciones')->checkboxList($opciones, ['unselect'=>NULL]);
+    ?>
+
 
 </div>
