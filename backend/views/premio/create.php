@@ -2,18 +2,19 @@
 
 use yii\helpers\Html;
 
-
-/* @var $this yii\web\View */
-/* @var $model app\models\Premio */
+/**
+ * @var yii\web\View $this
+ * @var app\models\Premio $model
+ */
 
 $this->title = 'Create Premio';
 $this->params['breadcrumbs'][] = ['label' => 'Premios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="premio-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

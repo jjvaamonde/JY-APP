@@ -1,40 +1,46 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Premio */
+/**
+ * @var yii\web\View $this
+ * @var app\models\Premio $model
+ */
 
 $this->title = $model->premioID;
 $this->params['breadcrumbs'][] = ['label' => 'Premios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="premio-view">
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->premioID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->premioID], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
+        'condensed' => false,
+        'hover' => true,
+        'mode' => Yii::$app->request->get('edit') == 't' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
+        'panel' => [
+            'heading' => $this->title,
+            'type' => DetailView::TYPE_INFO,
+        ],
         'attributes' => [
+            'premioID',
             'Nombre_Premio',
             'Descripcion_Premio',
             'Tipo_Premio',
             'Duracion',
             'Valor_Premio',
-            'premioID',
+            'status_pre',
         ],
+        'deleteOptions' => [
+            'url' => ['delete', 'id' => $model->premioID],
+        ],
+        'enableEditMode' => true,
     ]) ?>
 
 </div>

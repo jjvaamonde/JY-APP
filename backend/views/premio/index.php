@@ -1,37 +1,66 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\PremioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/**
+ * @var yii\web\View $this
+ * @var yii\data\ActiveDataProvider $dataProvider
+ * @var app\models\PremioSearch $searchModel
+ */
 
 $this->title = 'Premios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="premio-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Premio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php /* echo Html::a('Create Premio', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
-    <?= GridView::widget([
+
+    <?php Pjax::begin(); echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'premioID',
             'Nombre_Premio',
             'Descripcion_Premio',
             'Tipo_Premio',
             'Duracion',
-            'Valor_Premio',
-            // 'premioID',
+//            'Valor_Premio', 
+//            'status_pre', 
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+                            Yii::$app->urlManager->createUrl(['premio/view', 'id' => $model->premioID, 'edit' => 't']),
+                            ['title' => Yii::t('yii', 'Edit'),]
+                        );
+                    }
+                ],
+            ],
         ],
-    ]); ?>
+        'responsive' => true,
+        'hover' => true,
+        'condensed' => true,
+        'floatHeader' => true,
+
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
+            'type' => 'info',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
+            'showFooter' => false
+        ],
+    ]); Pjax::end(); ?>
+
 </div>

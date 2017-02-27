@@ -3,9 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\CuotaCreditoSearch */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var app\models\CuotaCreditoSearch $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="cuota-credito-search">
@@ -15,13 +17,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'cuota_CreditoID') ?>
+
     <?= $form->field($model, 'Cod_Pago') ?>
 
     <?= $form->field($model, 'Monto_Cuota') ?>
 
     <?= $form->field($model, 'Fecha_Cuota') ?>
 
-    <?= $form->field($model, 'cuota_CreditoID') ?>
+    <?= $form->field($model, 'status_cuota') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

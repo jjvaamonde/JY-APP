@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\CuotaCredito */
+/**
+ * @var yii\web\View $this
+ * @var app\models\CuotaCredito $model
+ */
 
-$this->title = 'Update Cuota Credito: ' . $model->cuota_CreditoID;
+$this->title = 'Update Cuota Credito: ' . ' ' . $model->cuota_CreditoID;
 $this->params['breadcrumbs'][] = ['label' => 'Cuota Creditos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->cuota_CreditoID, 'url' => ['view', 'id' => $model->cuota_CreditoID]];
 $this->params['breadcrumbs'][] = 'Update';

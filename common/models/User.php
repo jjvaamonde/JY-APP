@@ -1,48 +1,67 @@
 <?php
+
 namespace common\models;
+use backend\models\PaquetePremium;
+use backend\models\Premio;
+use backend\models\Publicidad;
+use backend\models\Reclamos;
+use backend\models\Rol;
+
+
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
+ * @property integer $usuarioID
+ * @property string $Rif_CI
+ * @property string $Login
+ * @property string $Clave
+ * @property string $Nombre
+ * @property string $Direccion
+ * @property integer $Telefono
+ * @property string $Correo_Electronico
  * @property string $auth_key
- * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property string $password_hash
+ * @property string $password_reset_token
+ * @property string $Avatar
+ * @property integer $Calificacion
+ * @property integer $Puntos
+ * @property integer $rol_id
+ * @property string $Fecha_UltimaConexion
+ * @property string $Cod_Referido
+ * @property integer $paquete_PremiumID
+ * @property integer $premioID
+ * @property integer $publicidadID
+ * @property integer $reclamosID
+ * @property integer $status
+ *
+ * @property Anuncio $anuncio
+ * @property Joinanunciotousuario[] $joinanunciotousuarios
+ * @property JoinpagoUsuariotousuario[] $joinpagoUsuariotousuarios
+ * @property JoinusuariototipoUsuario[] $joinusuariototipoUsuarios
+ * @property JoinventasUsuariotousuario[] $joinventasUsuariotousuarios
+ * @property PagoUsuario $pagoUsuario
+ * @property Publicidad $publicidad
+ * @property Reclamos $reclamos
+ * @property PaquetePremium $paquetePremium
+ * @property Premio $premio
+ * @property Publicidad $publicidad0
+ * @property Reclamos $reclamos0
+ * @property VentasUsuario $ventasUsuario
+ * @property VentasUsuario $ventasUsuario0
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \yii\db\ActiveRecord
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 1;
-
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%user}}';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
+        return 'user';
     }
 
     /**
@@ -51,139 +70,169 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['Rif_CI', 'Login', 'Clave', 'Nombre', 'Direccion', 'Telefono', 'Correo_Electronico', 'auth_key', 'created_at', 'updated_at', 'password_hash', 'Avatar', 'Calificacion', 'Puntos', 'rol_id', 'Fecha_UltimaConexion', 'Cod_Referido', 'status'], 'required'],
+            [['Direccion'], 'string'],
+            [['Telefono', 'created_at', 'updated_at', 'Calificacion', 'Puntos', 'rol_id', 'paquete_PremiumID', 'premioID', 'publicidadID', 'reclamosID', 'status'], 'integer'],
+            [['Fecha_UltimaConexion'], 'safe'],
+            [['Rif_CI', 'Login', 'Clave', 'Nombre', 'Correo_Electronico', 'Avatar', 'Cod_Referido'], 'string', 'max' => 50],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['Rif_CI'], 'unique'],
+            [['Login'], 'unique'],
+            [['Clave'], 'unique'],
+            [['paquete_PremiumID'], 'unique'],
+            [['premioID'], 'unique'],
+            [['publicidadID'], 'unique'],
+            [['reclamosID'], 'unique'],
+            [['paquete_PremiumID'], 'exist', 'skipOnError' => true, 'targetClass' => PaquetePremium::className(), 'targetAttribute' => ['paquete_PremiumID' => 'paquete_PremiumID']],
+            [['premioID'], 'exist', 'skipOnError' => true, 'targetClass' => Premio::className(), 'targetAttribute' => ['premioID' => 'premioID']],
+            [['publicidadID'], 'exist', 'skipOnError' => true, 'targetClass' => Publicidad::className(), 'targetAttribute' => ['publicidadID' => 'publicidadID']],
+            [['reclamosID'], 'exist', 'skipOnError' => true, 'targetClass' => Reclamos::className(), 'targetAttribute' => ['reclamosID' => 'reclamosID']],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public function attributeLabels()
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return [
+            'usuarioID' => 'Usuario ID',
+            'Rif_CI' => 'Rif/CI',
+            'Login' => 'Login',
+            'Clave' => 'Clave',
+            'Nombre' => 'Nombre',
+            'Direccion' => 'Dirección',
+            'Telefono' => 'Teléfono',
+            'Correo_Electronico' => 'Correo Electrónico',
+            'auth_key' => 'Auth Key',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'Avatar' => 'Avatar',
+            'Calificacion' => 'Calificación',
+            'Puntos' => 'Puntos',
+            'rol_id' => 'Rol ID',
+            'Fecha_UltimaConexion' => 'Fecha de última Conexión',
+            'Cod_Referido' => 'Codigo Referido',
+            'paquete_PremiumID' => 'Paquete Premium ID',
+            'premioID' => 'Premio ID',
+            'publicidadID' => 'Publicidad ID',
+            'reclamosID' => 'Reclamos ID',
+            'status' => 'Status',
+        ];
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function getAnuncio()
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return $this->hasOne(Anuncio::className(), ['Vendedor' => 'usuarioID']);
     }
 
     /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    public static function findByUsername($username)
+    public function getJoinanunciotousuarios()
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return $this->hasMany(Joinanunciotousuario::className(), ['usuarioID' => 'usuarioID']);
     }
 
     /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    public static function findByPasswordResetToken($token)
+    public function getJoinpagoUsuariotousuarios()
     {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+        return $this->hasMany(JoinpagoUsuariotousuario::className(), ['usuarioID' => 'usuarioID']);
     }
 
     /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
+     * @return \yii\db\ActiveQuery
      */
-    public static function isPasswordResetTokenValid($token)
+    public function getJoinusuariototipoUsuarios()
     {
-        if (empty($token)) {
-            return false;
-        }
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
+        return $this->hasMany(JoinusuariototipoUsuario::className(), ['usuarioID' => 'usuarioID']);
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public function getId()
+    public function getJoinventasUsuariotousuarios()
     {
-        return $this->getPrimaryKey();
+        return $this->hasMany(JoinventasUsuariotousuario::className(), ['usuarioID' => 'usuarioID']);
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public function getAuthKey()
+    public function getPagoUsuario()
     {
-        return $this->auth_key;
+        return $this->hasOne(PagoUsuario::className(), ['UsuarioID' => 'usuarioID']);
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public function validateAuthKey($authKey)
+    public function getPublicidad()
     {
-        return $this->getAuthKey() === $authKey;
+        return $this->hasOne(Publicidad::className(), ['fk_usuario' => 'usuarioID']);
     }
 
     /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @return \yii\db\ActiveQuery
      */
-    public function validatePassword($password)
+    public function getReclamos()
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return $this->hasOne(Reclamos::className(), ['Usuario' => 'usuarioID']);
     }
 
     /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
+     * @return \yii\db\ActiveQuery
      */
-    public function setPassword($password)
+    public function getPaquetePremium()
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        return $this->hasOne(PaquetePremium::className(), ['paquete_PremiumID' => 'paquete_PremiumID']);
     }
 
     /**
-     * Generates "remember me" authentication key
+     * @return \yii\db\ActiveQuery
      */
-    public function generateAuthKey()
+    public function getPremio()
     {
-        $this->auth_key = Yii::$app->security->generateRandomString();
+        return $this->hasOne(Premio::className(), ['premioID' => 'premioID']);
     }
 
     /**
-     * Generates new password reset token
+     * @return \yii\db\ActiveQuery
      */
-    public function generatePasswordResetToken()
+    public function getPublicidad0()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        return $this->hasOne(Publicidad::className(), ['publicidadID' => 'publicidadID']);
     }
 
     /**
-     * Removes password reset token
+     * @return \yii\db\ActiveQuery
      */
-    public function removePasswordResetToken()
+    public function getReclamos0()
     {
-        $this->password_reset_token = null;
+        return $this->hasOne(Reclamos::className(), ['reclamosID' => 'reclamosID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVentasUsuario()
+    {
+        return $this->hasOne(VentasUsuario::className(), ['Cod_Comprador' => 'usuarioID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVentasUsuario0()
+    {
+        return $this->hasOne(VentasUsuario::className(), ['Vendedor' => 'usuarioID']);
     }
 }

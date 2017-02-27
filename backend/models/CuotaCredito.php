@@ -30,7 +30,7 @@ class CuotaCredito extends \yii\db\ActiveRecord
         return [
             [['Cod_Pago', 'cuota_CreditoID'], 'integer'],
             [['Monto_Cuota'], 'number'],
-            [['Fecha_Cuota', 'cuota_CreditoID'], 'required'],
+            [['Fecha_Cuota'], 'required'],
             [['Fecha_Cuota'], 'safe'],
         ];
     }

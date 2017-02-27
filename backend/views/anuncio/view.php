@@ -1,32 +1,33 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Anuncio */
+/**
+ * @var yii\web\View $this
+ * @var backend\models\Anuncio $model
+ */
 
 $this->title = $model->anuncioID;
 $this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anuncio-view">
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->anuncioID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->anuncioID], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
+        'condensed' => false,
+        'hover' => true,
+        'mode' => Yii::$app->request->get('edit') == 't' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
+        'panel' => [
+            'heading' => $this->title,
+            'type' => DetailView::TYPE_INFO,
+        ],
         'attributes' => [
             'anuncioID',
             'Vendedor',
@@ -37,11 +38,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'DireccionVendedor',
             'Cantidad_Articulo',
             'Calificacion_Vendedor',
-            'Fecha_Publicacion',
+            [
+                'attribute' => 'Fecha_Publicacion',
+                'format' => [
+                    'date', (isset(Yii::$app->modules['datecontrol']['displaySettings']['date']))
+                        ? Yii::$app->modules['datecontrol']['displaySettings']['date']
+                        : 'd-m-Y'
+                ],
+                'type' => DetailView::INPUT_WIDGET,
+                'widgetOptions' => [
+                    'class' => DateControl::classname(),
+                    'type' => DateControl::FORMAT_DATE
+                ]
+            ],
             'Fecha_Caducidad',
             'CantImagen',
             'status_anuncio',
         ],
+        'deleteOptions' => [
+            'url' => ['delete', 'id' => $model->anuncioID],
+        ],
+        'enableEditMode' => true,
     ]) ?>
 
 </div>

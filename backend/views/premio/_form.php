@@ -1,33 +1,43 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Premio */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var app\models\Premio $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="premio-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
-    <?= $form->field($model, 'Nombre_Premio')->textInput(['maxlength' => true]) ?>
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
 
-    <?= $form->field($model, 'Descripcion_Premio')->textInput(['maxlength' => true]) ?>
+            'Nombre_Premio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Nombre  Premio...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Tipo_Premio')->textInput(['maxlength' => true]) ?>
+            'Descripcion_Premio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Descripcion  Premio...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Duracion')->textInput() ?>
+            'Tipo_Premio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Tipo  Premio...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Valor_Premio')->textInput() ?>
+            'Duracion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Duracion...']],
 
-    <?= $form->field($model, 'premioID')->textInput() ?>
+            'Valor_Premio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Valor  Premio...']],
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+           ]
 
-    <?php ActiveForm::end(); ?>
+    ]);
+
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    );
+    ActiveForm::end(); ?>
 
 </div>
