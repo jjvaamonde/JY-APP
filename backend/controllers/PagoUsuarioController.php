@@ -14,16 +14,13 @@ use yii\filters\VerbFilter;
  */
 class PagoUsuarioController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,12 +32,12 @@ class PagoUsuarioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PagoUsuarioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new PagoUsuarioSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -51,9 +48,13 @@ class PagoUsuarioController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->pago_UsuarioID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -63,7 +64,7 @@ class PagoUsuarioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PagoUsuario();
+        $model = new PagoUsuario;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->pago_UsuarioID]);

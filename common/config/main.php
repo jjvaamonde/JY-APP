@@ -2,6 +2,7 @@
 use kartik\datecontrol\Module;
 //use yii\jui\DatePicker;
 use kartik\widgets\DatePicker;
+use kartik\widgets\FileInput;
 return
 [
 
@@ -25,6 +26,22 @@ return
       [
         'class' => 'yii\debug\Module',
       ],
+
+
+
+        'fileinput'=>
+        [
+          'class' =>'kartik\fileinput\Module',
+
+         'pluginOptions'=>
+
+          [ 'multiple'=>true,
+            'browseClass' => 'btn btn-success',
+            'uploadClass' => 'btn btn-info',
+            'removeClass' => 'btn btn-danger',
+            'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> '
+          ]
+        ],
 
         'datecontrol' =>
          [

@@ -65,18 +65,18 @@ class AnuncioController extends Controller
     public function actionCreate()
     {
         $model = new Anuncio;
+      
+        if ($model->load(Yii::$app->request->post()))
+         {
 
-        if ($model->load(Yii::$app->request->post()) )
-        {
-          $model->status_anuncio='1';
-          if($model->save()){
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
-          }else {
-            # code...
-            print_r($model->getErrors());
-          }
-
-        } else {
+           $model->status_anuncio= 1;
+           if($model->save())
+           {
+             return $this->redirect(['view', 'id' => $model->anuncioID]);
+           }else{
+               print_r($model->getErrors());
+             }
+           } else {
             return $this->render('create', [
                 'model' => $model,
             ]);

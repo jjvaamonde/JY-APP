@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\SubCategoria */
+/**
+ * @var yii\web\View $this
+ * @var backend\models\SubCategoria $model
+ */
 
-$this->title = 'Update Sub Categoria: ' . $model->sub_CategoriaID;
+$this->title = 'Update Sub Categoria: ' . ' ' . $model->sub_CategoriaID;
 $this->params['breadcrumbs'][] = ['label' => 'Sub Categorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->sub_CategoriaID, 'url' => ['view', 'id' => $model->sub_CategoriaID]];
 $this->params['breadcrumbs'][] = 'Update';

@@ -11,7 +11,7 @@
 CREATE TABLE `anuncio` (
   `anuncioID` int(11) NOT NULL,
   `Vendedor` int(11) NOT NULL,
-  `Sub_Categoria` int(100) NOT NULL,
+  `Sub_categoria` int(11) NOT NULL,
   `Titulo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Clasificacion` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `Descripcion` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -23,6 +23,19 @@ CREATE TABLE `anuncio` (
   `Imagen` text COLLATE utf8_unicode_ci NOT NULL,
   `status_anuncio` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `anuncio`
+--
+
+INSERT INTO `anuncio` (`anuncioID`, `Vendedor`, `Sub_categoria`, `Titulo`, `Clasificacion`, `Descripcion`, `DireccionVendedor`, `Cantidad_Articulo`, `Calificacion_Vendedor`, `Fecha_Publicacion`, `Fecha_Caducidad`, `Imagen`, `status_anuncio`) VALUES
+(1, 0, 0, 'hola', 'premiun', 'Probando crear', 'la mata cabudare', 1, '2', '2017-02-20', 20, '1286996470.gif', 1),
+(2, 0, 0, 'Probando mensaje', 'premiun', 'esto es una prueba', 'calle 9', 3, '2', '2017-02-01', 30, '2u5w64x.jpg', 1),
+(3, 0, 0, 'titulo', 'Premiun2', 'otra prueba', 'la mata 2', 4, '2', '2017-02-02', 40, '2u5w64x.jpg', 1),
+(4, 0, 0, 'Prueba de grabado', 'premiun', 'Demostracion de guardado', 'cabudare centro', 3, '3', '2017-02-01', 40, 'IMG-20161021-WA0002.jpg', 1),
+(6, 92, 1, 'fechas y mas fechas', 'libre', 'fechas', 'no me la se', 1, '0', '0000-00-00', 1, 'image.gif', 1),
+(7, 44, 2, 'fecha de nuevo ', 'libre', 'gggga', 'furer', 1, '0', '0000-00-00', 2, 'Abraham-e-Isaac.jpg', 1),
+(8, 3, 2, 'otra vez', 'falsa', 'deee', 'jjj', 1, '0', '0000-00-00', 7, 'frases-bonitas-de-amor-para-dedicar-7.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +119,7 @@ INSERT INTO `categoria` (`categoriaID`, `Nombre_Categ`, `Descripcion_Cate`, `Can
 
 CREATE TABLE `cuota_credito` (
   `cuota_CreditoID` int(11) NOT NULL,
-  `Cod_Pago` int(11) NOT NULL DEFAULT '0',
+  `Cod_Pago` int(20) NOT NULL,
   `Monto_Cuota` double NOT NULL DEFAULT '0',
   `Fecha_Cuota` datetime NOT NULL,
   `status_cuota` int(2) NOT NULL
@@ -266,7 +279,7 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 
 CREATE TABLE `pago_usuario` (
   `pago_UsuarioID` int(11) NOT NULL,
-  `UsuarioID` int(100) NOT NULL,
+  `usuarioID` int(100) NOT NULL,
   `Cuotas` int(100) NOT NULL,
   `Tipo_Pago` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Monto_Total` double NOT NULL DEFAULT '0',
@@ -318,7 +331,7 @@ CREATE TABLE `premio` (
 
 CREATE TABLE `publicidad` (
   `publicidadID` int(11) NOT NULL,
-  `fk_usuario` int(11) NOT NULL,
+  `usuarioID` int(100) NOT NULL,
   `Titulo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Fecha_Inicial` date NOT NULL,
   `Fecha_Final` date NOT NULL,
@@ -336,7 +349,7 @@ CREATE TABLE `publicidad` (
 
 CREATE TABLE `reclamos` (
   `reclamosID` int(11) NOT NULL,
-  `Usuario` int(100) NOT NULL,
+  `usuarioID` int(11) NOT NULL,
   `Descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Motivo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Fecha` datetime NOT NULL,
@@ -357,6 +370,13 @@ CREATE TABLE `sub_categoria` (
   `Descripcion_Subcat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `status_sub` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sub_categoria`
+--
+
+INSERT INTO `sub_categoria` (`sub_CategoriaID`, `Cod_Categoria`, `Nombre_SubCat`, `Descripcion_Subcat`, `status_sub`) VALUES
+(1, 0, 'deportivos', 'solo zapatos deportivos', 1);
 
 -- --------------------------------------------------------
 
@@ -481,8 +501,8 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE `ventas_usuario` (
   `ventas_UsuarioID` int(100) NOT NULL,
-  `Vendedor` int(11) NOT NULL,
-  `Cod_Comprador` int(11) NOT NULL,
+  `usuarioVendedorID` int(11) NOT NULL,
+  `usuarioCompradorID` int(11) NOT NULL,
   `Fecha_Venta` date NOT NULL,
   `Monto` double NOT NULL,
   `Tipo_Pago` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -498,8 +518,7 @@ CREATE TABLE `ventas_usuario` (
 --
 ALTER TABLE `anuncio`
   ADD PRIMARY KEY (`anuncioID`),
-  ADD UNIQUE KEY `IDVendedor` (`Vendedor`),
-  ADD UNIQUE KEY `Sub_Categoria` (`Sub_Categoria`),
+  ADD UNIQUE KEY `anuncioID_2` (`anuncioID`),
   ADD KEY `anuncioID` (`anuncioID`);
 
 --
@@ -541,7 +560,6 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `cuota_credito`
   ADD PRIMARY KEY (`cuota_CreditoID`),
-  ADD UNIQUE KEY `Cod_Pago` (`Cod_Pago`),
   ADD KEY `cuota_CreditoID` (`cuota_CreditoID`);
 
 --
@@ -632,7 +650,7 @@ ALTER TABLE `migration`
 --
 ALTER TABLE `pago_usuario`
   ADD PRIMARY KEY (`pago_UsuarioID`),
-  ADD UNIQUE KEY `UsuarioID` (`UsuarioID`),
+  ADD UNIQUE KEY `pago_UsuarioID_2` (`pago_UsuarioID`),
   ADD KEY `pago_UsuarioID` (`pago_UsuarioID`);
 
 --
@@ -640,6 +658,7 @@ ALTER TABLE `pago_usuario`
 --
 ALTER TABLE `paquete_premium`
   ADD PRIMARY KEY (`paquete_PremiumID`),
+  ADD UNIQUE KEY `paquete_PremiumID_2` (`paquete_PremiumID`),
   ADD KEY `paquete_PremiumID` (`paquete_PremiumID`);
 
 --
@@ -647,6 +666,8 @@ ALTER TABLE `paquete_premium`
 --
 ALTER TABLE `premio`
   ADD PRIMARY KEY (`premioID`),
+  ADD UNIQUE KEY `Nombre_Premio` (`Nombre_Premio`),
+  ADD UNIQUE KEY `premioID_2` (`premioID`),
   ADD KEY `premioID` (`premioID`);
 
 --
@@ -654,23 +675,23 @@ ALTER TABLE `premio`
 --
 ALTER TABLE `publicidad`
   ADD PRIMARY KEY (`publicidadID`),
-  ADD UNIQUE KEY `Cod_Usuario` (`fk_usuario`),
-  ADD KEY `publicidadID` (`publicidadID`);
+  ADD UNIQUE KEY `publicidadID_2` (`publicidadID`),
+  ADD KEY `publicidadID` (`publicidadID`),
+  ADD KEY `publicidadID_3` (`publicidadID`);
 
 --
 -- Indices de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
   ADD PRIMARY KEY (`reclamosID`),
-  ADD UNIQUE KEY `Usuario` (`Usuario`),
-  ADD KEY `reclamosID` (`reclamosID`);
+  ADD KEY `reclamosID` (`reclamosID`),
+  ADD KEY `reclamosID_2` (`reclamosID`);
 
 --
 -- Indices de la tabla `sub_categoria`
 --
 ALTER TABLE `sub_categoria`
   ADD PRIMARY KEY (`sub_CategoriaID`),
-  ADD UNIQUE KEY `Cod_Categoria` (`Cod_Categoria`),
   ADD KEY `sub_CategoriaID` (`sub_CategoriaID`);
 
 --
@@ -723,10 +744,9 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `ventas_usuario`
   ADD PRIMARY KEY (`ventas_UsuarioID`),
-  ADD UNIQUE KEY `Cod_Vendedor` (`Vendedor`),
-  ADD UNIQUE KEY `Cod_Comprador` (`Cod_Comprador`),
   ADD KEY `ventas_UsuarioID` (`ventas_UsuarioID`),
-  ADD KEY `ventas_UsuarioID_2` (`ventas_UsuarioID`);
+  ADD KEY `ventas_UsuarioID_2` (`ventas_UsuarioID`),
+  ADD KEY `ventas_UsuarioID_3` (`ventas_UsuarioID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -736,7 +756,7 @@ ALTER TABLE `ventas_usuario`
 -- AUTO_INCREMENT de la tabla `anuncio`
 --
 ALTER TABLE `anuncio`
-  MODIFY `anuncioID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `anuncioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
@@ -781,7 +801,7 @@ ALTER TABLE `reclamos`
 -- AUTO_INCREMENT de la tabla `sub_categoria`
 --
 ALTER TABLE `sub_categoria`
-  MODIFY `sub_CategoriaID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sub_CategoriaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tipo_anuncio`
 --
@@ -812,13 +832,6 @@ ALTER TABLE `ventas_usuario`
 --
 
 --
--- Filtros para la tabla `anuncio`
---
-ALTER TABLE `anuncio`
-  ADD CONSTRAINT `fk_sub_Categoria` FOREIGN KEY (`Sub_Categoria`) REFERENCES `sub_categoria` (`sub_CategoriaID`),
-  ADD CONSTRAINT `fk_vendedor` FOREIGN KEY (`Vendedor`) REFERENCES `usuario` (`usuarioID`);
-
---
 -- Filtros para la tabla `auth_assignment`
 --
 ALTER TABLE `auth_assignment`
@@ -836,12 +849,6 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `cuota_credito`
---
-ALTER TABLE `cuota_credito`
-  ADD CONSTRAINT `fk_pago` FOREIGN KEY (`Cod_Pago`) REFERENCES `pago_usuario` (`pago_UsuarioID`);
 
 --
 -- Filtros para la tabla `joinanunciototipo_anuncio`
@@ -920,24 +927,6 @@ ALTER TABLE `menu`
   ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `pago_usuario`
---
-ALTER TABLE `pago_usuario`
-  ADD CONSTRAINT `usuario` FOREIGN KEY (`UsuarioID`) REFERENCES `usuario` (`usuarioID`);
-
---
--- Filtros para la tabla `publicidad`
---
-ALTER TABLE `publicidad`
-  ADD CONSTRAINT `fk_usuario_dueño` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`usuarioID`);
-
---
--- Filtros para la tabla `reclamos`
---
-ALTER TABLE `reclamos`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`Usuario`) REFERENCES `usuario` (`usuarioID`);
-
---
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -945,13 +934,6 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `premio` FOREIGN KEY (`premioID`) REFERENCES `premio` (`premioID`),
   ADD CONSTRAINT `publicidad` FOREIGN KEY (`publicidadID`) REFERENCES `publicidad` (`publicidadID`),
   ADD CONSTRAINT `reclamo` FOREIGN KEY (`reclamosID`) REFERENCES `reclamos` (`reclamosID`);
-
---
--- Filtros para la tabla `ventas_usuario`
---
-ALTER TABLE `ventas_usuario`
-  ADD CONSTRAINT `fk_comprador` FOREIGN KEY (`Cod_Comprador`) REFERENCES `usuario` (`usuarioID`),
-  ADD CONSTRAINT `vendedor` FOREIGN KEY (`Vendedor`) REFERENCES `usuario` (`usuarioID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

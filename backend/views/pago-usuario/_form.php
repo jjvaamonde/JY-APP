@@ -1,39 +1,51 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
+use kartik\datecontrol\DateControl;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\PagoUsuario */
-/* @var $form yii\widgets\ActiveForm */
+/**
+ * @var yii\web\View $this
+ * @var backend\models\PagoUsuario $model
+ * @var yii\widgets\ActiveForm $form
+ */
 ?>
 
 <div class="pago-usuario-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
-    <?= $form->field($model, 'Tipo_Pago')->textInput(['maxlength' => true]) ?>
+        'model' => $model,
+        'form' => $form,
+        'columns' => 1,
+        'attributes' => [
 
-    <?= $form->field($model, 'Monto_Total')->textInput() ?>
+            'Tipo_Pago' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Tipo  Pago...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Monto_Cancelado')->textInput() ?>
+            'Cod_Usuario' => ['type' => TabularForm::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cod  Usuario...']],
 
-    <?= $form->field($model, 'Cod_Usuario')->textInput() ?>
+            'Nombre_ServicioComprado' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Nombre  Servicio Comprado...', 'maxlength' => 50]],
 
-    <?= $form->field($model, 'Nombre_ServicioComprado')->textInput(['maxlength' => true]) ?>
+            'Fecha_Pago' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
 
-    <?= $form->field($model, 'Fecha_Pago')->textInput() ?>
+            'arr_Cuotas' => ['type' => TabularForm::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Arr  Cuotas...']],
 
-    <?= $form->field($model, 'arr_Cuotas')->textInput() ?>
+            'Periodo_Cobro' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Periodo  Cobro...']],
 
-    <?= $form->field($model, 'Periodo_Cobro')->textInput() ?>
+            'pago_UsuarioID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Pago  Usuario ID...']],
 
-    <?= $form->field($model, 'pago_UsuarioID')->textInput() ?>
+            'Monto_Total' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Monto  Total...']],
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+            'Monto_Cancelado' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Monto  Cancelado...']],
 
-    <?php ActiveForm::end(); ?>
+        ]
+
+    ]);
+
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    );
+    ActiveForm::end(); ?>
 
 </div>
