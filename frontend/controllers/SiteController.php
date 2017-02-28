@@ -13,7 +13,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\AccessHelpers;
-
+use backend\models\site\idexVendedor;
+use backend\models\site\views\layouts\main2;
 /**
  * Site controller
  */
@@ -38,7 +39,7 @@ class SiteController extends Controller
                     'roles' => ['?'],
                 ],
                 [
-                    'actions' => ['about', 'logout', 'index'],
+                    'actions' => ['about', 'logout', 'index','perfil'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],
@@ -58,20 +59,20 @@ public function beforeAction($action)
     if (!parent::beforeAction($action)) {
         return false;
     }
- 
+
     $operacion = str_replace("/", "-", Yii::$app->controller->route);
- 
-    $permitirSiempre = ['site-captcha', 'site-signup', 'site-index', 'site-error', 'site-contact', 'site-login', 'site-logout'];
- 
+
+    $permitirSiempre = ['site-captcha', 'site-signup', 'site-index', 'site-error', 'site-contact', 'site-login', 'site-logout','site-perfil'];
+
     if (in_array($operacion, $permitirSiempre)) {
         return true;
     }
- 
+
     if (!AccessHelpers::getAcceso($operacion)) {
         echo $this->render('nopermitido');
         return false;
     }
- 
+
     return true;
 }
     /**
@@ -121,6 +122,15 @@ public function beforeAction($action)
             ]);
         }
     }
+    public function actionPerfil()
+    {
+        if (!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+            echo $this->layout ='main2';
+            return $this->render('indexVendedor');
+        }
 
     /**
      * Logs out the current user.

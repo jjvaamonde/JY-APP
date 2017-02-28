@@ -71,7 +71,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['username'], 'unique'],
             [['reclamosID'], 'unique'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['rol_ID','default','vlaue'=>self::ROLE_USER],
+            ['rol_ID','default','value'=>self::ROLE_USER],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             [['reclamosID'], 'exist', 'skipOnError' => true, 'targetClass' => Reclamos::className(), 'targetAttribute' => ['reclamosID' => 'reclamosID']],
         ];
@@ -152,7 +152,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
             return $this->hasOne(Rol::className(), ['rol_ID' => 'rol_ID']);
     }
-  
+
     public static function findIdentity($id)
     {
         return static::findOne(['usuarioID' => $id, 'status' => self::STATUS_ACTIVE]);
