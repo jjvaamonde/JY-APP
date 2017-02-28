@@ -8,7 +8,11 @@ use yii\helpers\Html;
  */
 
 $this->title = 'Update Operacion: ' . ' ' . $model->operacion_ID;
+<<<<<<< HEAD
 $this->params['breadcrumbs'][] = ['label' => 'Operaciones', 'url' => ['index']];
+=======
+$this->params['breadcrumbs'][] = ['label' => 'Operacions', 'url' => ['index']];
+>>>>>>> origin/cambios-Yosbe
 $this->params['breadcrumbs'][] = ['label' => $model->operacion_ID, 'url' => ['view', 'id' => $model->operacion_ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

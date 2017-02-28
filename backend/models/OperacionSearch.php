@@ -39,7 +39,11 @@ class OperacionSearch extends Operacion
         }
 
         $query->andFilterWhere([
+<<<<<<< HEAD
             'operacion_ID' => $this->operacion_ID,
+=======
+            'operacion_ID' => $this->operacion_ID,
+>>>>>>> origin/cambios-Yosbe
         ]);
 
         $query->andFilterWhere(['like', 'nombre_op', $this->nombre_op]);
