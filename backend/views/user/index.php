@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var common\models\UserSearch $searchModel
  */
 
-$this->title = 'Users';
+$this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
