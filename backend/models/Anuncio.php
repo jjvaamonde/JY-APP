@@ -101,7 +101,6 @@ class Anuncio extends \yii\db\ActiveRecord
     public function getImagenes()
     {
         return $this->hasMany(ImagenAnuncio::className() ,['imagenID' => 'imagenID']);
-
-     
+ 
     }
 }
