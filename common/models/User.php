@@ -1,13 +1,8 @@
 <?php
 
 namespace common\models;
-use backend\models\PaquetePremium;
-use backend\models\Premio;
-use backend\models\Publicidad;
 use backend\models\Reclamos;
 use backend\models\Rol;
-
-
 
 use Yii;
 
@@ -16,12 +11,14 @@ use Yii;
  *
  * @property integer $usuarioID
  * @property string $Rif_CI
- * @property string $Login
- * @property string $Clave
+ * @property string $username
+ * @property integer $premioID
+ * @property integer $paquete_premiunID
+ * @property integer $publicidadID
  * @property string $Nombre
  * @property string $Direccion
  * @property integer $Telefono
- * @property string $Correo_Electronico
+ * @property string $email
  * @property string $auth_key
  * @property integer $created_at
  * @property integer $updated_at
@@ -30,35 +27,47 @@ use Yii;
  * @property string $Avatar
  * @property integer $Calificacion
  * @property integer $Puntos
- * @property integer $rol_id
+ * @property integer $rol_ID
  * @property string $Fecha_UltimaConexion
  * @property string $Cod_Referido
- * @property integer $paquete_PremiumID
- * @property integer $premioID
- * @property integer $publicidadID
  * @property integer $reclamosID
  * @property integer $status
  *
- * @property Anuncio $anuncio
  * @property Joinanunciotousuario[] $joinanunciotousuarios
  * @property JoinpagoUsuariotousuario[] $joinpagoUsuariotousuarios
  * @property JoinusuariototipoUsuario[] $joinusuariototipoUsuarios
  * @property JoinventasUsuariotousuario[] $joinventasUsuariotousuarios
- * @property PagoUsuario $pagoUsuario
- * @property Publicidad $publicidad
  * @property Reclamos $reclamos
- * @property PaquetePremium $paquetePremium
- * @property Premio $premio
- * @property Publicidad $publicidad0
- * @property Reclamos $reclamos0
- * @property VentasUsuario $ventasUsuario
- * @property VentasUsuario $ventasUsuario0
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
      */
+     public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
     public static function tableName()
     {
         return 'user';
@@ -70,23 +79,16 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Rif_CI', 'Login', 'Clave', 'Nombre', 'Direccion', 'Telefono', 'Correo_Electronico', 'auth_key', 'created_at', 'updated_at', 'password_hash', 'Avatar', 'Calificacion', 'Puntos', 'rol_id', 'Fecha_UltimaConexion', 'Cod_Referido', 'status'], 'required'],
+            [[ 'username', 'email', 'password_hash', 'status'], 'required'],
+            [['premioID', 'paquete_premiunID', 'publicidadID', 'Telefono', 'created_at', 'updated_at', 'Calificacion', 'Puntos', 'rol_ID', 'reclamosID', 'status'], 'integer'],
             [['Direccion'], 'string'],
-            [['Telefono', 'created_at', 'updated_at', 'Calificacion', 'Puntos', 'rol_id', 'paquete_PremiumID', 'premioID', 'publicidadID', 'reclamosID', 'status'], 'integer'],
             [['Fecha_UltimaConexion'], 'safe'],
-            [['Rif_CI', 'Login', 'Clave', 'Nombre', 'Correo_Electronico', 'Avatar', 'Cod_Referido'], 'string', 'max' => 50],
+            [['Rif_CI', 'username', 'Nombre', 'email', 'Avatar', 'Cod_Referido'], 'string', 'max' => 50],
             [['auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
             [['Rif_CI'], 'unique'],
-            [['Login'], 'unique'],
-            [['Clave'], 'unique'],
-            [['paquete_PremiumID'], 'unique'],
-            [['premioID'], 'unique'],
-            [['publicidadID'], 'unique'],
+            [['username'], 'unique'],
             [['reclamosID'], 'unique'],
-            [['paquete_PremiumID'], 'exist', 'skipOnError' => true, 'targetClass' => PaquetePremium::className(), 'targetAttribute' => ['paquete_PremiumID' => 'paquete_PremiumID']],
-            [['premioID'], 'exist', 'skipOnError' => true, 'targetClass' => Premio::className(), 'targetAttribute' => ['premioID' => 'premioID']],
-            [['publicidadID'], 'exist', 'skipOnError' => true, 'targetClass' => Publicidad::className(), 'targetAttribute' => ['publicidadID' => 'publicidadID']],
             [['reclamosID'], 'exist', 'skipOnError' => true, 'targetClass' => Reclamos::className(), 'targetAttribute' => ['reclamosID' => 'reclamosID']],
         ];
     }
@@ -98,13 +100,12 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'usuarioID' => 'Usuario ID',
-            'Rif_CI' => 'Rif/CI',
-            'Login' => 'Login',
-            'Clave' => 'Clave',
+            'Rif_CI' => 'Rif/Ci',
+            'username' => 'Username',
             'Nombre' => 'Nombre',
             'Direccion' => 'Dirección',
             'Telefono' => 'Teléfono',
-            'Correo_Electronico' => 'Correo Electrónico',
+            'email' => 'Email',
             'auth_key' => 'Auth Key',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -113,23 +114,15 @@ class User extends \yii\db\ActiveRecord
             'Avatar' => 'Avatar',
             'Calificacion' => 'Calificación',
             'Puntos' => 'Puntos',
-            'rol_id' => 'Rol ID',
-            'Fecha_UltimaConexion' => 'Fecha de última Conexión',
+            'rol_ID' => 'Rol',
+            'premioID' => 'Premio',
+            'paquete_premiunID' => 'Paquete Premium',
+            'publicidadID' => 'Publicidad',
+            'Fecha_UltimaConexion' => 'Fecha última conexión',
             'Cod_Referido' => 'Codigo Referido',
-            'paquete_PremiumID' => 'Paquete Premium ID',
-            'premioID' => 'Premio ID',
-            'publicidadID' => 'Publicidad ID',
-            'reclamosID' => 'Reclamos ID',
+            'reclamosID' => 'Reclamos',
             'status' => 'Status',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAnuncio()
-    {
-        return $this->hasOne(Anuncio::className(), ['Vendedor' => 'usuarioID']);
     }
 
     /**
@@ -167,77 +160,12 @@ class User extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPagoUsuario()
-    {
-        return $this->hasOne(PagoUsuario::className(), ['UsuarioID' => 'usuarioID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPublicidad()
-    {
-        return $this->hasOne(Publicidad::className(), ['fk_usuario' => 'usuarioID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getReclamos()
-    {
-        return $this->hasOne(Reclamos::className(), ['Usuario' => 'usuarioID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPaquetePremium()
-    {
-        return $this->hasOne(PaquetePremium::className(), ['paquete_PremiumID' => 'paquete_PremiumID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPremio()
-    {
-        return $this->hasOne(Premio::className(), ['premioID' => 'premioID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPublicidad0()
-    {
-        return $this->hasOne(Publicidad::className(), ['publicidadID' => 'publicidadID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getReclamos0()
     {
         return $this->hasOne(Reclamos::className(), ['reclamosID' => 'reclamosID']);
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVentasUsuario()
-    {
-        return $this->hasOne(VentasUsuario::className(), ['Cod_Comprador' => 'usuarioID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVentasUsuario0()
-    {
-        return $this->hasOne(VentasUsuario::className(), ['Vendedor' => 'usuarioID']);
-    }
     public function getRol()
     {
-            return $this->hasOne(Rol::className(), ['id' => 'rol_id']);
+            return $this->hasOne(Rol::className(), ['rol_ID' => 'rol_ID']);
     }
-
 }

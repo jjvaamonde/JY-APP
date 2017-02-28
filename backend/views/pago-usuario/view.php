@@ -1,61 +1,43 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\detail\DetailView;
-use kartik\datecontrol\DateControl;
+use yii\widgets\DetailView;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\PagoUsuario $model
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\PagoUsuario */
 
 $this->title = $model->pago_UsuarioID;
 $this->params['breadcrumbs'][] = ['label' => 'Pago Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pago-usuario-view">
-    <div class="page-header">
-        <h1><?= Html::encode($this->title) ?></h1>
-    </div>
 
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->pago_UsuarioID], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->pago_UsuarioID], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
     <?= DetailView::widget([
         'model' => $model,
-        'condensed' => false,
-        'hover' => true,
-        'mode' => Yii::$app->request->get('edit') == 't' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
-        'panel' => [
-            'heading' => $this->title,
-            'type' => DetailView::TYPE_INFO,
-        ],
         'attributes' => [
-            'pago_UsuarioID',
-            'UsuarioID',
-            'Cuotas',
             'Tipo_Pago',
             'Monto_Total',
             'Monto_Cancelado',
+            'Cod_Usuario',
             'Nombre_ServicioComprado',
-            [
-                'attribute' => 'Fecha_Pago',
-                'format' => [
-                    'date', (isset(Yii::$app->modules['datecontrol']['displaySettings']['date']))
-                        ? Yii::$app->modules['datecontrol']['displaySettings']['date']
-                        : 'd-m-Y'
-                ],
-                'type' => DetailView::INPUT_WIDGET,
-                'widgetOptions' => [
-                    'class' => DateControl::classname(),
-                    'type' => DateControl::FORMAT_DATE
-                ]
-            ],
+            'Fecha_Pago',
+            'arr_Cuotas',
             'Periodo_Cobro',
-            'status_p_u',
+            'pago_UsuarioID',
         ],
-        'deleteOptions' => [
-            'url' => ['delete', 'id' => $model->pago_UsuarioID],
-        ],
-        'enableEditMode' => true,
     ]) ?>
 
 </div>

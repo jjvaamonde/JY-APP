@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var backend\models\OperacionSearch $searchModel
  */
 
-$this->title = 'Operacions';
+$this->title = 'Operaciones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="operacion-index">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'operacionID',
+            'operacion_ID',
             'nombre_op',
 
             [
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
-                            Yii::$app->urlManager->createUrl(['operacion/view', 'id' => $model->operacionID, 'edit' => 't']),
+                            Yii::$app->urlManager->createUrl(['operacion/view', 'id' => $model->operacion_ID, 'edit' => 't']),
                             ['title' => Yii::t('yii', 'Edit'),]
                         );
                     }

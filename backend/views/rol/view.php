@@ -10,7 +10,7 @@ use kartik\datecontrol\DateControl;
  */
 
 $this->title = $model->rol_ID;
-$this->params['breadcrumbs'][] = ['label' => 'Rols', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rol-view">

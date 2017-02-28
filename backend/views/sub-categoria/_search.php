@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\SubCategoriaSearch $model
- * @var yii\widgets\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\SubCategoriaSearch */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="sub-categoria-search">
@@ -19,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sub_CategoriaID') ?>
 
-    <?= $form->field($model, 'categoriaID') ?>
+    <?= $form->field($model, 'Cod_Categoria') ?>
 
     <?= $form->field($model, 'Nombre_SubCat') ?>
 

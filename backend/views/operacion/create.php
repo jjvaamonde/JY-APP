@@ -8,7 +8,7 @@ use yii\helpers\Html;
  */
 
 $this->title = 'Create Operacion';
-$this->params['breadcrumbs'][] = ['label' => 'Operacions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Operaciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="operacion-create">
