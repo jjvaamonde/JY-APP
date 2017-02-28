@@ -1,6 +1,6 @@
 <aside class="main-sidebar">
 
-    <section class="sidebar">
+    <section class="sidebar skin-purple-light">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">
