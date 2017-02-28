@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2017 a las 18:18:07
+-- Tiempo de generación: 28-02-2017 a las 15:44:10
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anuncio` (
   `anuncioID` int(11) NOT NULL,
-  `Vendedor` int(11) NOT NULL,
-  `Sub_Categoria` int(100) NOT NULL,
+  `usuarioID` int(11) NOT NULL,
+  `sub_categoriaID` int(11) NOT NULL,
   `Titulo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Clasificacion` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `Descripcion` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -37,8 +37,8 @@ CREATE TABLE `anuncio` (
   `Cantidad_Articulo` int(11) NOT NULL DEFAULT '0',
   `Calificacion_Vendedor` int(11) NOT NULL DEFAULT '0',
   `Fecha_Publicacion` date NOT NULL,
-  `Fecha_Caducidad` bigint(20) NOT NULL,
-  `CantImagen` int(50) NOT NULL,
+  `Fecha_Caducidad` date NOT NULL,
+  `categoriaID` int(11) NOT NULL,
   `status_anuncio` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -116,10 +116,23 @@ CREATE TABLE `categoria` (
 
 CREATE TABLE `cuota_credito` (
   `cuota_CreditoID` int(11) NOT NULL,
-  `Cod_Pago` int(11) NOT NULL DEFAULT '0',
+  `pagoID` int(11) NOT NULL,
   `Monto_Cuota` double NOT NULL DEFAULT '0',
   `Fecha_Cuota` date NOT NULL,
   `status_cuota` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagenanuncio`
+--
+
+CREATE TABLE `imagenanuncio` (
+  `imagenID` int(11) NOT NULL,
+  `anuncioID` int(11) NOT NULL,
+  `direccion_imagen` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `status_imagen` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -294,7 +307,7 @@ INSERT INTO `operacion` (`operacionID`, `nombre_op`) VALUES
 
 CREATE TABLE `pago_usuario` (
   `pago_UsuarioID` int(11) NOT NULL,
-  `UsuarioID` int(100) NOT NULL,
+  `usuarioID` int(11) NOT NULL,
   `Cuotas` int(100) NOT NULL,
   `Tipo_Pago` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Monto_Total` double NOT NULL DEFAULT '0',
@@ -356,7 +369,7 @@ INSERT INTO `premio` (`premioID`, `Nombre_Premio`, `Descripcion_Premio`, `Tipo_P
 
 CREATE TABLE `publicidad` (
   `publicidadID` int(11) NOT NULL,
-  `fk_usuario` int(11) NOT NULL,
+  `usuarioID` int(11) NOT NULL,
   `Titulo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Fecha_Inicial` date NOT NULL,
   `Fecha_Final` date NOT NULL,
@@ -374,7 +387,7 @@ CREATE TABLE `publicidad` (
 
 CREATE TABLE `reclamos` (
   `reclamosID` int(11) NOT NULL,
-  `Usuario` int(100) NOT NULL,
+  `usuarioID` int(11) NOT NULL,
   `Descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Motivo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Fecha` datetime NOT NULL,
@@ -412,7 +425,6 @@ INSERT INTO `rol` (`rol_ID`, `nombre_rol`) VALUES
 --
 
 CREATE TABLE `rol_operacion` (
-  `rol_id` int(11) NOT NULL,
   `operacion_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -420,8 +432,8 @@ CREATE TABLE `rol_operacion` (
 -- Volcado de datos para la tabla `rol_operacion`
 --
 
-INSERT INTO `rol_operacion` (`rol_id`, `operacion_id`) VALUES
-(1, 1);
+INSERT INTO `rol_operacion` (`operacion_id`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -431,7 +443,7 @@ INSERT INTO `rol_operacion` (`rol_id`, `operacion_id`) VALUES
 
 CREATE TABLE `sub_categoria` (
   `sub_CategoriaID` int(11) NOT NULL,
-  `Cod_Categoria` int(11) NOT NULL,
+  `categoriaID` int(11) NOT NULL,
   `Nombre_SubCat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Descripcion_Subcat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `status_sub` int(2) NOT NULL
@@ -503,29 +515,35 @@ CREATE TABLE `tipo_usuario` (
 CREATE TABLE `user` (
   `usuarioID` int(11) NOT NULL,
   `Rif_CI` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Login` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Clave` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `premioID` int(11) DEFAULT NULL,
+  `paquete_premiunID` int(11) DEFAULT NULL,
+  `publicidadID` int(11) DEFAULT NULL,
   `Nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Direccion` longtext COLLATE utf8_unicode_ci NOT NULL,
   `Telefono` int(11) NOT NULL,
-  `Correo_Electronico` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `auth_key` varchar(32) CHARACTER SET ascii NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `auth_key` varchar(32) CHARACTER SET ascii DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
   `password_hash` varchar(255) CHARACTER SET ascii NOT NULL,
   `password_reset_token` varchar(255) CHARACTER SET ascii DEFAULT NULL,
-  `Avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Calificacion` int(11) NOT NULL,
-  `Puntos` int(11) NOT NULL,
-  `rol_id` int(11) NOT NULL,
+  `Avatar` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Calificacion` int(11) DEFAULT NULL,
+  `Puntos` int(11) DEFAULT NULL,
+  `rol_ID` int(11) NOT NULL,
   `Fecha_UltimaConexion` date NOT NULL,
-  `Cod_Referido` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `paquete_PremiumID` int(11) DEFAULT NULL,
-  `premioID` int(11) DEFAULT NULL,
-  `publicidadID` int(11) DEFAULT NULL,
+  `Cod_Referido` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `reclamosID` int(11) DEFAULT NULL,
   `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`usuarioID`, `Rif_CI`, `username`, `premioID`, `paquete_premiunID`, `publicidadID`, `Nombre`, `Direccion`, `Telefono`, `email`, `auth_key`, `created_at`, `updated_at`, `password_hash`, `password_reset_token`, `Avatar`, `Calificacion`, `Puntos`, `rol_ID`, `Fecha_UltimaConexion`, `Cod_Referido`, `reclamosID`, `status`) VALUES
+(1, '23706880', 'Yosbely', 1, 1, 1, 'Yosbely Ramos', 'gsdfg', 12345, 'yosbrg@gmail.com', '123456', 1234, 1234, '123456', '3', 'fgaa', 3, 33, 1, '2017-01-31', '1', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -535,8 +553,8 @@ CREATE TABLE `user` (
 
 CREATE TABLE `ventas_usuario` (
   `ventas_UsuarioID` int(100) NOT NULL,
-  `Vendedor` int(11) NOT NULL,
-  `Cod_Comprador` int(11) NOT NULL,
+  `usuarioVenID` int(11) NOT NULL,
+  `usuarioComID` int(11) NOT NULL,
   `Fecha_Venta` date NOT NULL,
   `Monto` double NOT NULL,
   `Tipo_Pago` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -552,9 +570,9 @@ CREATE TABLE `ventas_usuario` (
 --
 ALTER TABLE `anuncio`
   ADD PRIMARY KEY (`anuncioID`),
-  ADD UNIQUE KEY `IDVendedor` (`Vendedor`),
-  ADD UNIQUE KEY `Sub_Categoria` (`Sub_Categoria`),
-  ADD KEY `anuncioID` (`anuncioID`);
+  ADD KEY `anuncioID` (`anuncioID`),
+  ADD KEY `anuncioID_2` (`anuncioID`),
+  ADD KEY `anuncioID_3` (`anuncioID`);
 
 --
 -- Indices de la tabla `auth_assignment`
@@ -588,15 +606,23 @@ ALTER TABLE `auth_rule`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`categoriaID`),
-  ADD KEY `categoriaID` (`categoriaID`);
+  ADD KEY `categoriaID` (`categoriaID`),
+  ADD KEY `categoriaID_2` (`categoriaID`);
 
 --
 -- Indices de la tabla `cuota_credito`
 --
 ALTER TABLE `cuota_credito`
   ADD PRIMARY KEY (`cuota_CreditoID`),
-  ADD UNIQUE KEY `Cod_Pago` (`Cod_Pago`),
-  ADD KEY `cuota_CreditoID` (`cuota_CreditoID`);
+  ADD KEY `cuota_CreditoID` (`cuota_CreditoID`),
+  ADD KEY `cuota_CreditoID_2` (`cuota_CreditoID`);
+
+--
+-- Indices de la tabla `imagenanuncio`
+--
+ALTER TABLE `imagenanuncio`
+  ADD PRIMARY KEY (`imagenID`),
+  ADD KEY `imagenID` (`imagenID`);
 
 --
 -- Indices de la tabla `joinanunciototipo_anuncio`
@@ -692,38 +718,40 @@ ALTER TABLE `operacion`
 --
 ALTER TABLE `pago_usuario`
   ADD PRIMARY KEY (`pago_UsuarioID`),
-  ADD UNIQUE KEY `UsuarioID` (`UsuarioID`),
-  ADD KEY `pago_UsuarioID` (`pago_UsuarioID`);
+  ADD KEY `pago_UsuarioID` (`pago_UsuarioID`),
+  ADD KEY `pago_UsuarioID_2` (`pago_UsuarioID`);
 
 --
 -- Indices de la tabla `paquete_premium`
 --
 ALTER TABLE `paquete_premium`
   ADD PRIMARY KEY (`paquete_PremiumID`),
-  ADD KEY `paquete_PremiumID` (`paquete_PremiumID`);
+  ADD KEY `paquete_PremiumID` (`paquete_PremiumID`),
+  ADD KEY `paquete_PremiumID_2` (`paquete_PremiumID`);
 
 --
 -- Indices de la tabla `premio`
 --
 ALTER TABLE `premio`
   ADD PRIMARY KEY (`premioID`),
-  ADD KEY `premioID` (`premioID`);
+  ADD KEY `premioID` (`premioID`),
+  ADD KEY `premioID_2` (`premioID`);
 
 --
 -- Indices de la tabla `publicidad`
 --
 ALTER TABLE `publicidad`
   ADD PRIMARY KEY (`publicidadID`),
-  ADD UNIQUE KEY `Cod_Usuario` (`fk_usuario`),
-  ADD KEY `publicidadID` (`publicidadID`);
+  ADD KEY `publicidadID` (`publicidadID`),
+  ADD KEY `publicidadID_2` (`publicidadID`);
 
 --
 -- Indices de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
   ADD PRIMARY KEY (`reclamosID`),
-  ADD UNIQUE KEY `Usuario` (`Usuario`),
-  ADD KEY `reclamosID` (`reclamosID`);
+  ADD KEY `reclamosID` (`reclamosID`),
+  ADD KEY `reclamosID_2` (`reclamosID`);
 
 --
 -- Indices de la tabla `rol`
@@ -735,15 +763,16 @@ ALTER TABLE `rol`
 -- Indices de la tabla `rol_operacion`
 --
 ALTER TABLE `rol_operacion`
-  ADD PRIMARY KEY (`rol_id`,`operacion_id`);
+  ADD PRIMARY KEY (`operacion_id`),
+  ADD KEY `operacion_id` (`operacion_id`);
 
 --
 -- Indices de la tabla `sub_categoria`
 --
 ALTER TABLE `sub_categoria`
   ADD PRIMARY KEY (`sub_CategoriaID`),
-  ADD UNIQUE KEY `Cod_Categoria` (`Cod_Categoria`),
-  ADD KEY `sub_CategoriaID` (`sub_CategoriaID`);
+  ADD KEY `sub_CategoriaID` (`sub_CategoriaID`),
+  ADD KEY `sub_CategoriaID_2` (`sub_CategoriaID`);
 
 --
 -- Indices de la tabla `tipo_anuncio`
@@ -771,28 +800,21 @@ ALTER TABLE `tipo_usuario`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`usuarioID`),
   ADD UNIQUE KEY `Rif_CI` (`Rif_CI`),
-  ADD UNIQUE KEY `Login` (`Login`),
-  ADD UNIQUE KEY `Clave` (`Clave`),
-  ADD UNIQUE KEY `paquete_PremiumID_2` (`paquete_PremiumID`),
-  ADD UNIQUE KEY `premioID_2` (`premioID`),
-  ADD UNIQUE KEY `publicidadID_2` (`publicidadID`),
+  ADD UNIQUE KEY `Login` (`username`),
   ADD UNIQUE KEY `reclamosID_2` (`reclamosID`),
-  ADD KEY `paquete_PremiumID` (`paquete_PremiumID`),
-  ADD KEY `premioID` (`premioID`),
-  ADD KEY `publicidadID` (`publicidadID`),
   ADD KEY `reclamosID` (`reclamosID`),
   ADD KEY `usuarioID` (`usuarioID`),
-  ADD KEY `usuarioID_2` (`usuarioID`);
+  ADD KEY `usuarioID_2` (`usuarioID`),
+  ADD KEY `usuarioID_3` (`usuarioID`);
 
 --
 -- Indices de la tabla `ventas_usuario`
 --
 ALTER TABLE `ventas_usuario`
   ADD PRIMARY KEY (`ventas_UsuarioID`),
-  ADD UNIQUE KEY `Cod_Vendedor` (`Vendedor`),
-  ADD UNIQUE KEY `Cod_Comprador` (`Cod_Comprador`),
   ADD KEY `ventas_UsuarioID` (`ventas_UsuarioID`),
-  ADD KEY `ventas_UsuarioID_2` (`ventas_UsuarioID`);
+  ADD KEY `ventas_UsuarioID_2` (`ventas_UsuarioID`),
+  ADD KEY `ventas_UsuarioID_3` (`ventas_UsuarioID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -813,6 +835,11 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `cuota_credito`
   MODIFY `cuota_CreditoID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `imagenanuncio`
+--
+ALTER TABLE `imagenanuncio`
+  MODIFY `imagenID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
@@ -872,7 +899,7 @@ ALTER TABLE `tipo_pubicidad`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `usuarioID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ventas_usuario`
 --
@@ -881,13 +908,6 @@ ALTER TABLE `ventas_usuario`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `anuncio`
---
-ALTER TABLE `anuncio`
-  ADD CONSTRAINT `fk_sub_Categoria` FOREIGN KEY (`Sub_Categoria`) REFERENCES `sub_categoria` (`sub_CategoriaID`),
-  ADD CONSTRAINT `fk_vendedor` FOREIGN KEY (`Vendedor`) REFERENCES `user` (`usuarioID`);
 
 --
 -- Filtros para la tabla `auth_assignment`
@@ -907,12 +927,6 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `cuota_credito`
---
-ALTER TABLE `cuota_credito`
-  ADD CONSTRAINT `fk_pago` FOREIGN KEY (`Cod_Pago`) REFERENCES `pago_usuario` (`pago_UsuarioID`);
 
 --
 -- Filtros para la tabla `joinanunciototipo_anuncio`
@@ -991,38 +1005,10 @@ ALTER TABLE `menu`
   ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `pago_usuario`
---
-ALTER TABLE `pago_usuario`
-  ADD CONSTRAINT `usuario` FOREIGN KEY (`UsuarioID`) REFERENCES `user` (`usuarioID`);
-
---
--- Filtros para la tabla `publicidad`
---
-ALTER TABLE `publicidad`
-  ADD CONSTRAINT `fk_usuario_dueño` FOREIGN KEY (`fk_usuario`) REFERENCES `user` (`usuarioID`);
-
---
--- Filtros para la tabla `reclamos`
---
-ALTER TABLE `reclamos`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`Usuario`) REFERENCES `user` (`usuarioID`);
-
---
 -- Filtros para la tabla `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `paquete` FOREIGN KEY (`paquete_PremiumID`) REFERENCES `paquete_premium` (`paquete_PremiumID`),
-  ADD CONSTRAINT `premio` FOREIGN KEY (`premioID`) REFERENCES `premio` (`premioID`),
-  ADD CONSTRAINT `publicidad` FOREIGN KEY (`publicidadID`) REFERENCES `publicidad` (`publicidadID`),
   ADD CONSTRAINT `reclamo` FOREIGN KEY (`reclamosID`) REFERENCES `reclamos` (`reclamosID`);
-
---
--- Filtros para la tabla `ventas_usuario`
---
-ALTER TABLE `ventas_usuario`
-  ADD CONSTRAINT `fk_comprador` FOREIGN KEY (`Cod_Comprador`) REFERENCES `user` (`usuarioID`),
-  ADD CONSTRAINT `vendedor` FOREIGN KEY (`Vendedor`) REFERENCES `user` (`usuarioID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -21,17 +21,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Rif_CI') ?>
 
-    <?= $form->field($model, 'Login') ?>
+    <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'Clave') ?>
+    <?= //$form->field($model, 'premioID') ?>
 
-    <?= $form->field($model, 'Nombre') ?>
+    <?= //$form->field($model, 'paquete_premiunID') ?>
+
+    <?php // echo $form->field($model, 'publicidadID') ?>
+
+    <?php  echo $form->field($model, 'Nombre') ?>
 
     <?php // echo $form->field($model, 'Direccion') ?>
 
     <?php // echo $form->field($model, 'Telefono') ?>
 
-    <?php // echo $form->field($model, 'Correo_Electronico') ?>
+    <?php // echo $form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'auth_key') ?>
 
@@ -49,17 +53,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'Puntos') ?>
 
-    <?php // echo $form->field($model, 'rol_id') ?>
+    <?php // echo $form->field($model, 'rol_ID') ?>
 
     <?php // echo $form->field($model, 'Fecha_UltimaConexion') ?>
 
     <?php // echo $form->field($model, 'Cod_Referido') ?>
-
-    <?php // echo $form->field($model, 'paquete_PremiumID') ?>
-
-    <?php // echo $form->field($model, 'premioID') ?>
-
-    <?php // echo $form->field($model, 'publicidadID') ?>
 
     <?php // echo $form->field($model, 'reclamosID') ?>
 

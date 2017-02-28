@@ -70,7 +70,7 @@ class RolController extends Controller
  
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->rol_ID]);
         } 
         else 
             {
@@ -95,7 +95,7 @@ class RolController extends Controller
  
             $model->operaciones = \yii\helpers\ArrayHelper::getColumn(
             $model->getRolOperaciones()->asArray()->all(),
-            'operacion_id'
+            'operacion_ID'
     );
  
         if ($model->load(Yii::$app->request->post())) 
@@ -106,7 +106,7 @@ class RolController extends Controller
             }
                 if ($model->save())
                  {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->rol_ID]);
                 }
             } else {
                 return $this->render('update', [

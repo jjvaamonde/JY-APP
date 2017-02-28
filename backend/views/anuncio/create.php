@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var backend\models\Anuncio $model
  */
 
-$this->title = 'Crear Anuncio';
+$this->title = 'Create Anuncio';
 $this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
