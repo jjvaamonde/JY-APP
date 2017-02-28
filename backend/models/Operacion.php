@@ -37,8 +37,8 @@ class Operacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'operacionID' => 'Operacion ID',
-            'nombre_op' => 'Nombre Op',
+            'operacion_ID' => 'Operación ID',
+            'nombre_op' => 'Nombre Operación',
         ];
     }
 }
