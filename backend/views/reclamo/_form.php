@@ -21,7 +21,7 @@ use kartik\datecontrol\DateControl;
         'columns' => 1,
         'attributes' => [
 
-            'Usuario' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Usuario...']],
+            'usuarioID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Usuario ID...']],
 
             'Descripcion' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Descripcion...', 'maxlength' => 255]],
 

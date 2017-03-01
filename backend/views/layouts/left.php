@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar skin-purple">
 
     <section class="sidebar skin-purple-light">
 
@@ -28,51 +28,18 @@
 
         <?= dmstr\widgets\Menu::widget(
             [
-                'options' => ['class' => 'sidebar-menu'],
+                'options' => ['class' => 'sidebar-menu skin-purple-light' ],
                 'items' => [
                     ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
-                      ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
-                      ['label' => 'Categoria',
-                        'icon' => 'glyphicon glyphicon-copyright-mark',
-                        'url' => ['/categoria'],
-                        'items' => [
-                            ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
-                            ],
-                        ],
-                    ['label' => 'Usuario', 'icon' => 'fa fa-file-code-o', 'url' => ['/user']],
-                    ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
-                    ['label' => 'Premio', 'icon' => 'fa fa-file-code-o', 'url' => ['/premio']],
-                    ['label' => 'Cuota de Credito', 'icon' => 'fa fa-file-code-o', 'url' => ['/cuota-credito']],
-                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
+                    ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
+                    ['label' => 'Mis Datos', 'icon' => 'glyphicon glyphicon-user', 'url' => ['/user']],
+                    ['label' => 'Reclamos', 'icon' => 'glyphicon glyphicon-registration-mark', 'url' => ['/reclamo']],
+                    ['label' => 'Premios', 'icon' => 'glyphicon glyphicon-gift', 'url' => ['/premio']],
+                    ['label' => 'Ventas', 'icon' => 'glyphicon glyphicon-usd', 'url' => ['/ventas-usuarios']],
+                    ['label' => 'Paquetes', 'icon' => 'glyphicon glyphicon-shopping-cart', 'url' => ['/paquete-premium']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Same tools',
-                        'icon' => 'fa fa-share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'fa fa-circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'fa fa-circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
                     ],
-                ],
+
             ]
 
         ) ?>

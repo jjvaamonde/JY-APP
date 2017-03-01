@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Premio $model
+ * @var backend\models\Premio $model
  */
 
 $this->title = 'Update Premio: ' . ' ' . $model->premioID;

@@ -8,15 +8,14 @@ use Yii;
  * This is the model class for table "reclamos".
  *
  * @property integer $reclamosID
- * @property integer $Usuario
+ * @property integer $usuarioID
  * @property string $Descripcion
  * @property string $Motivo
  * @property string $Fecha
  * @property string $Estado_reclamo
  * @property integer $status
  *
- * @property Usuario $usuario
- * @property Usuario $usuario0
+ * @property User $user
  */
 class Reclamos extends \yii\db\ActiveRecord
 {
@@ -34,13 +33,11 @@ class Reclamos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Usuario', 'Descripcion', 'Motivo', 'Fecha', 'status'], 'required'],
-            [['Usuario', 'status'], 'integer'],
+            [['usuarioID', 'Descripcion', 'Motivo', 'Fecha', 'status'], 'required'],
+            [['usuarioID', 'status'], 'integer'],
             [['Fecha'], 'safe'],
             [['Descripcion'], 'string', 'max' => 255],
             [['Motivo', 'Estado_reclamo'], 'string', 'max' => 50],
-            [['Usuario'], 'unique'],
-            [['Usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['Usuario' => 'usuarioID']],
         ];
     }
 
@@ -51,7 +48,7 @@ class Reclamos extends \yii\db\ActiveRecord
     {
         return [
             'reclamosID' => 'Reclamos ID',
-            'Usuario' => 'Usuario',
+            'usuarioID' => 'Usuario ID',
             'Descripcion' => 'Descripcion',
             'Motivo' => 'Motivo',
             'Fecha' => 'Fecha',
@@ -63,16 +60,8 @@ class Reclamos extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getUser()
     {
-        return $this->hasOne(Usuario::className(), ['usuarioID' => 'Usuario']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuario0()
-    {
-        return $this->hasOne(Usuario::className(), ['reclamosID' => 'reclamosID']);
+        return $this->hasOne(User::className(), ['reclamosID' => 'reclamosID']);
     }
 }

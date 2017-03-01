@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'attributes' => [
             'reclamosID',
-            'Usuario',
+            'usuarioID',
             'Descripcion',
             'Motivo',
             [

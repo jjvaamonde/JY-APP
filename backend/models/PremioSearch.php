@@ -1,14 +1,14 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Premio;
+use backend\models\Premio;
 
 /**
- * PremioSearch represents the model behind the search form about `app\models\Premio`.
+ * PremioSearch represents the model behind the search form about `backend\models\Premio`.
  */
 class PremioSearch extends Premio
 {

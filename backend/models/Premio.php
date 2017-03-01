@@ -7,14 +7,13 @@ use Yii;
 /**
  * This is the model class for table "premio".
  *
+ * @property integer $premioID
  * @property string $Nombre_Premio
  * @property string $Descripcion_Premio
  * @property string $Tipo_Premio
  * @property integer $Duracion
  * @property integer $Valor_Premio
- * @property integer $premioID
- *
- * @property Usuario[] $usuarios
+ * @property integer $status_pre
  */
 class Premio extends \yii\db\ActiveRecord
 {
@@ -32,9 +31,9 @@ class Premio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio', 'Duracion', 'Valor_Premio'], 'required'],
-            [['Duracion', 'Valor_Premio', 'premioID'], 'integer'],
-            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio'], 'string', 'max' => 100],
+            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio', 'Duracion', 'Valor_Premio', 'status_pre'], 'required'],
+            [['Duracion', 'Valor_Premio', 'status_pre'], 'integer'],
+            [['Nombre_Premio', 'Descripcion_Premio', 'Tipo_Premio'], 'string', 'max' => 50],
         ];
     }
 
@@ -44,20 +43,13 @@ class Premio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Nombre_Premio' => 'Nombre del premio',
-            'Descripcion_Premio' => 'Descripción del premio',
-            'Tipo_Premio' => 'Tipo de premio',
-            'Duracion' => 'Duración (días)',
-            'Valor_Premio' => 'Valor del premio',
             'premioID' => 'Premio ID',
+            'Nombre_Premio' => 'Nombre  Premio',
+            'Descripcion_Premio' => 'Descripcion  Premio',
+            'Tipo_Premio' => 'Tipo  Premio',
+            'Duracion' => 'Duracion',
+            'Valor_Premio' => 'Valor  Premio',
+            'status_pre' => 'Status Pre',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuarios()
-    {
-        return $this->hasMany(Usuario::className(), ['premioID' => 'premioID']);
     }
 }

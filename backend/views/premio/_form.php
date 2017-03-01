@@ -7,7 +7,7 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Premio $model
+ * @var backend\models\Premio $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -31,7 +31,9 @@ use kartik\datecontrol\DateControl;
 
             'Valor_Premio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Valor  Premio...']],
 
-           ]
+            'status_pre' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Status Pre...']],
+
+        ]
 
     ]);
 
