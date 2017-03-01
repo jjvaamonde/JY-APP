@@ -49,6 +49,7 @@ class SiteController extends Controller
             'class' => VerbFilter::className(),
             'actions' => [
                 'logout' => ['post'],
+                'perfil'=>['post','get'],
             ],
         ],
     ];
@@ -124,12 +125,8 @@ public function beforeAction($action)
     }
     public function actionPerfil()
     {
-        if (!Yii::$app->user->isGuest)
-        {
-            return $this->goHome();
-        }
-            echo $this->layout ='main2';
-            return $this->render('indexVendedor');
+            echo $this->layout ='main';
+            return $this->render('perfil');
         }
 
     /**

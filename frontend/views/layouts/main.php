@@ -41,7 +41,7 @@ AppAsset::register($this);
 
                 $menuItems[] = ['label' => 'Reclamos', 'url' => ['/reclamos']];
                  $menuItems[] = ['label' => 'Anuncio', 'url' => ['/anuncio']];
-                  $menuItems[] = ['label' => 'Perfil', 'url' => ['/backend/web/index']];
+                  $menuItems[] = ['label' => 'Perfil', 'url' => ['/site/perfil']];
                 $menuItems[] = [  'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']  ];
