@@ -256,7 +256,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
-
+    public function setRol()
+    {
+        $this->rol_ID = ROLE_USER;
+    }
     /**
      * Generates "remember me" authentication key
      */

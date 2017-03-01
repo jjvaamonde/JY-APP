@@ -50,8 +50,9 @@ class AnuncioController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+       {
+         return $this->redirect(['view', 'id' => $model->anuncioID]);
         } else {
             return $this->render('view', ['model' => $model]);
         }
@@ -66,8 +67,16 @@ class AnuncioController extends Controller
     {
         $model = new Anuncio;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->anuncioID]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+         {
+             $model->status_anuncio ='1';
+             if($model->save())
+             {
+                 return $this->redirect(['view', 'id' => $model->anuncioID]);
+             }
+            else{
+                  print_r($model->getErrors());
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,

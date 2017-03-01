@@ -125,8 +125,8 @@ public function beforeAction($action)
     }
     public function actionPerfil()
     {
-            echo $this->layout ='main';
-            return $this->render('perfil');
+          //  echo $this->layout ='main';
+            return $this->redirect('http://localhost/JY-APP/backend/web');
         }
 
     /**

@@ -27,6 +27,10 @@ use Yii;
  */
 class Anuncio extends \yii\db\ActiveRecord
 {
+
+  const STATUS_DELETED = 0;
+   const STATUS_ACTIVE = 1;
+//   const FECHA_ACTUAL = $date
     /**
      * @inheritdoc
      */
@@ -43,7 +47,7 @@ class Anuncio extends \yii\db\ActiveRecord
         return [
             [['usuarioID', 'sub_categoriaID', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'categoriaID',], 'required'],
             [['usuarioID', 'sub_categoriaID', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'categoriaID', 'status_anuncio'], 'integer'],
-            [['Descripcion'], 'string'],
+            [['Descripcion','imagen'], 'string'],
             [['Fecha_Publicacion', 'Fecha_Caducidad'], 'safe'],
             [['Titulo'], 'string', 'max' => 50],
             [['Clasificacion'], 'string', 'max' => 10],
@@ -59,7 +63,7 @@ class Anuncio extends \yii\db\ActiveRecord
         return [
             'anuncioID' => 'Anuncio ID',
             'usuarioID' => 'Usuario ID',
-            'sub_categoriaID' => 'Sub Categoria ID',
+            'sub_categoriaID' => 'Sub Categoria ',
             'Titulo' => 'Titulo',
             'Clasificacion' => 'Clasificacion',
             'Descripcion' => 'Descripcion',
@@ -68,7 +72,8 @@ class Anuncio extends \yii\db\ActiveRecord
             'Calificacion_Vendedor' => 'Calificacion  Vendedor',
             'Fecha_Publicacion' => 'Fecha  Publicacion',
             'Fecha_Caducidad' => 'Fecha  Caducidad',
-            'categoriaID' => 'Categoria ID',
+            'categoriaID' => 'Categoria ',
+            'imagen'=> 'Imagen del Anuncio',
             'status_anuncio' => 'Status Anuncio',
         ];
     }

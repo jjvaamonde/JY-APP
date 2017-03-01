@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use kartik\datecontrol\DateControl;
-
+use kartik\widgets\FileInput;
 /**
  * @var yii\web\View $this
  * @var backend\models\Anuncio $model
@@ -21,9 +21,12 @@ use kartik\datecontrol\DateControl;
         'columns' => 1,
         'attributes' => [
 
-            'usuarioID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Usuario ID...']],
+           'usuarioID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Usuario ID...']],
+            'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Titulo...', 'maxlength' => 50]],
 
-            'sub_categoriaID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Sub Categoria ID...']],
+            'categoriaID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Categoria ID...']],
+
+            'sub_categoriaID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Seleccione Sub Categoria ']],
 
             'Titulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Titulo...', 'maxlength' => 50]],
 
@@ -31,19 +34,18 @@ use kartik\datecontrol\DateControl;
 
             'Descripcion' => ['type' => Form::INPUT_TEXTAREA, 'options' => ['placeholder' => 'Enter Descripcion...','rows' => 6]],
 
-            'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Direccion Vendedor...', 'maxlength' => 255]],
+           'DireccionVendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Direccion Vendedor...', 'maxlength' => 255]],
 
-            'Fecha_Publicacion' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
+          'Fecha_Publicacion' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
 
             'Fecha_Caducidad' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATE]],
-
-            'categoriaID' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Categoria ID...']],
-
-            'status_anuncio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Status Anuncio...']],
 
             'Cantidad_Articulo' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cantidad  Articulo...']],
 
             'Calificacion_Vendedor' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Calificacion  Vendedor...']],
+
+            'imagen' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => FileInput::classname(),'pluginOptions' => ['previewFileType' => 'any']],
+          //  'status_anuncio' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Status Anuncio...']],
 
         ]
 

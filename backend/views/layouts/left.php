@@ -39,7 +39,7 @@
                             ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
                             ],
                         ],
-                    ['label' => 'Usuario', 'icon' => 'fa fa-file-code-o', 'url' => ['/usuario']],
+                    ['label' => 'Usuario', 'icon' => 'fa fa-file-code-o', 'url' => ['/user']],
                     ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
                     ['label' => 'Premio', 'icon' => 'fa fa-file-code-o', 'url' => ['/premio']],
                     ['label' => 'Cuota de Credito', 'icon' => 'fa fa-file-code-o', 'url' => ['/cuota-credito']],

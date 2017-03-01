@@ -17,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php /* echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])*/  ?>
+        <?php  echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])  ?>
     </p>
 
     <?= ListView::widget([
