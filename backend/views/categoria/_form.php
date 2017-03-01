@@ -1,41 +1,28 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\widgets\ActiveForm;
-use kartik\builder\Form;
-use kartik\datecontrol\DateControl;
+use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\Categoria $model
- * @var yii\widgets\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\Categoria */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="categoria-form">
 
-    <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
+    <?php $form = ActiveForm::begin(); ?>
 
-        'model' => $model,
-        'form' => $form,
-        'columns' => 1,
-        'attributes' => [
+    <?= $form->field($model, 'Nombre_Categ')->textInput(['maxlength' => true]) ?>
 
-            'Nombre_Categ' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Nombre  Categ...', 'maxlength' => 50]],
+    <?= $form->field($model, 'Descripcion_Cate')->textInput(['maxlength' => true]) ?>
 
-            'Descripcion_Cate' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Descripcion  Cate...', 'maxlength' => 50]],
+    <?= $form->field($model, 'Cantidad_SubCategoria')->textInput() ?>
 
-            'Cantidad_SubCategoria' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Cantidad  Sub Categoria...']],
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        
+    </div>
 
-            'status_cate' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Enter Status Cate...']],
-
-        ]
-
-    ]);
-
-    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
-        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
-    );
-    ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
 </div>

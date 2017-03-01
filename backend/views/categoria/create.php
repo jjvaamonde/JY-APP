@@ -2,19 +2,18 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\Categoria $model
- */
 
-$this->title = 'Create Categoria';
+/* @var $this yii\web\View */
+/* @var $model backend\models\Categoria */
+
+$this->title = 'Crear Categoria';
 $this->params['breadcrumbs'][] = ['label' => 'Categorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categoria-create">
-    <div class="page-header">
-        <h1><?= Html::encode($this->title) ?></h1>
-    </div>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

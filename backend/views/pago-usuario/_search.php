@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\PagoUsuarioSearch $model
- * @var yii\widgets\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\PagoUsuarioSearch */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="pago-usuario-search">
@@ -17,25 +15,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'pago_UsuarioID') ?>
-
-    <?= $form->field($model, 'UsuarioID') ?>
-
-    <?= $form->field($model, 'Cuotas') ?>
-
     <?= $form->field($model, 'Tipo_Pago') ?>
 
     <?= $form->field($model, 'Monto_Total') ?>
 
-    <?php // echo $form->field($model, 'Monto_Cancelado') ?>
+    <?= $form->field($model, 'Monto_Cancelado') ?>
 
-    <?php // echo $form->field($model, 'Nombre_ServicioComprado') ?>
+    <?= $form->field($model, 'Cod_Usuario') ?>
+
+    <?= $form->field($model, 'Nombre_ServicioComprado') ?>
 
     <?php // echo $form->field($model, 'Fecha_Pago') ?>
 
+    <?php // echo $form->field($model, 'arr_Cuotas') ?>
+
     <?php // echo $form->field($model, 'Periodo_Cobro') ?>
 
-    <?php // echo $form->field($model, 'status_p_u') ?>
+    <?php // echo $form->field($model, 'pago_UsuarioID') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

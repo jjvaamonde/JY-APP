@@ -2,19 +2,18 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\PagoUsuario $model
- */
+
+/* @var $this yii\web\View */
+/* @var $model backend\models\PagoUsuario */
 
 $this->title = 'Create Pago Usuario';
 $this->params['breadcrumbs'][] = ['label' => 'Pago Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pago-usuario-create">
-    <div class="page-header">
-        <h1><?= Html::encode($this->title) ?></h1>
-    </div>
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

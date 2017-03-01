@@ -21,7 +21,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>JYY</b>APP</a>
+        <a href="#"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -63,7 +63,7 @@ $fieldOptions2 = [
         <!-- /.social-auth-links -->
 
         <a href="#">I forgot my password</a><br>
-        <a href="\frontend\views\signup.php" class="text-center">Register a new membership</a>
+        <a href="register.html" class="text-center">Register a new membership</a>
 
     </div>
     <!-- /.login-box-body -->

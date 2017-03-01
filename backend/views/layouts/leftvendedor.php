@@ -1,6 +1,6 @@
 <aside class="main-sidebar">
 
-    <section class="sidebar skin-purple-light">
+    <section class="sidebar">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">
@@ -32,14 +32,8 @@
                 'items' => [
                     ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
                       ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
-                      ['label' => 'Categoria',
-                        'icon' => 'glyphicon glyphicon-copyright-mark',
-                        'url' => ['/categoria'],
-                        'items' => [
-                            ['label' => '  Sub-Categorias', 'icon' => 'glyphicon glyphicon-indent-right ', 'url' => ['/sub-categoria'],],
-                            ],
-                        ],
-                    ['label' => 'Usuario', 'icon' => 'fa fa-file-code-o', 'url' => ['/usuario']],
+                  
+                    ['label' => 'Mis Datos', 'icon' => 'fa fa-file-code-o', 'url' => ['/usuario/create']],
                     ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
                     ['label' => 'Premio', 'icon' => 'fa fa-file-code-o', 'url' => ['/premio']],
                     ['label' => 'Cuota de Credito', 'icon' => 'fa fa-file-code-o', 'url' => ['/cuota-credito']],

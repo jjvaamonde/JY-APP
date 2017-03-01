@@ -2,12 +2,10 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\PagoUsuario $model
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\PagoUsuario */
 
-$this->title = 'Update Pago Usuario: ' . ' ' . $model->pago_UsuarioID;
+$this->title = 'Update Pago Usuario: ' . $model->pago_UsuarioID;
 $this->params['breadcrumbs'][] = ['label' => 'Pago Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->pago_UsuarioID, 'url' => ['view', 'id' => $model->pago_UsuarioID]];
 $this->params['breadcrumbs'][] = 'Update';
