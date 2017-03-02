@@ -31,38 +31,25 @@
                 'options' => ['class' => 'sidebar-menu skin-blue'],
                 'items' => [
                     ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
-                    ['label' => 'Mis Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
+                    ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
                     ['label' => 'Mis Datos', 'icon' => 'fa fa-file-code-o', 'url' => ['/user/view']],
-                    ['label' => 'Reclamo', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
-                    ['label' => 'Mis ventas', 'icon' => 'fa fa-file-code-o', 'url' => ['/ventas-vendedor']]
-                    ['label' => 'Salir', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Same tools',
+                        'label' => 'Categoria',
                         'icon' => 'fa fa-share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'fa fa-circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'fa fa-circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
+                        'url' =>  ['/categoria'],
+                        'items' =>
+                      [
+                          ['label' => '   Sub Categorias', 'icon' => 'fa fa-file-code-o', 'url' => ['/sub-categoria'],],
+                      ],],
+                    ['label' => 'Reclamos', 'icon' => 'fa fa-file-code-o', 'url' => ['/reclamo']],
+                    ['label' => 'Usuarios', 'icon' => 'fa fa-file-code-o', 'url' => ['/user']],
+                    ['label' => 'Paquetes', 'icon' => 'fa fa-file-code-o', 'url' => ['/paquetes-premiun']],
+                    ['label' => 'Rol', 'icon' => 'fa fa-file-code-o', 'url' => ['/ventas-vendedor']],
+                    ['label' => 'Operaciones', 'icon' => 'fa fa-file-code-o', 'url' => ['/ventas-vendedor']],
+                    ['label' => 'Publicidad', 'icon' => 'fa fa-file-code-o', 'url' => ['/ventas-vendedor']],
+                    ['label' => 'Pagos', 'icon' => 'fa fa-file-code-o', 'url' => ['/ventas-vendedor']],
+                    ['label' => 'Salir', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     ],
-                ],
             ]
 
         ) ?>
