@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ListView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /**
@@ -17,18 +17,57 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="page-header">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php  echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])  ?>
+        <?php /* echo Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
-    <?= ListView::widget([
+    <?php Pjax::begin(); echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->anuncioID), ['view', 'id' => $model->anuncioID]);
-        },
-    ]) ?>
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'anuncioID',
+            'usuarioID',
+            'sub_categoriaID',
+            'Titulo',
+            'Clasificacion',
+//            'Descripcion:ntext', 
+//            'DireccionVendedor', 
+//            'Cantidad_Articulo', 
+//            'Calificacion_Vendedor', 
+//            ['attribute' => 'Fecha_Publicacion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
+//            ['attribute' => 'Fecha_Caducidad','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
+//            'categoriaID', 
+//            'imagen', 
+//            'status_anuncio', 
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+                            Yii::$app->urlManager->createUrl(['anuncio/view', 'id' => $model->anuncioID, 'edit' => 't']),
+                            ['title' => Yii::t('yii', 'Edit'),]
+                        );
+                    }
+                ],
+            ],
+        ],
+        'responsive' => true,
+        'hover' => true,
+        'condensed' => true,
+        'floatHeader' => true,
+
+        'panel' => [
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
+            'type' => 'info',
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
+            'showFooter' => false
+        ],
+    ]); Pjax::end(); ?>
 
 </div>

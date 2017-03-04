@@ -1,7 +1,8 @@
 <?php
 
 namespace backend\models;
-
+use yii\web\UploadedFile;
+use yii\base\Model;
 use Yii;
 
 /**
@@ -19,6 +20,7 @@ use Yii;
  * @property string $Fecha_Publicacion
  * @property string $Fecha_Caducidad
  * @property integer $categoriaID
+ * @property string $imagen
  * @property integer $status_anuncio
  *
  * @property JoinanunciototipoAnuncio[] $joinanunciototipoAnuncios
@@ -27,10 +29,8 @@ use Yii;
  */
 class Anuncio extends \yii\db\ActiveRecord
 {
-
-  const STATUS_DELETED = 0;
-   const STATUS_ACTIVE = 1;
-//   const FECHA_ACTUAL = $date
+  //public $filename_file;
+  //public $filename;
     /**
      * @inheritdoc
      */
@@ -45,13 +45,14 @@ class Anuncio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['usuarioID', 'sub_categoriaID', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'categoriaID',], 'required'],
+            [['usuarioID', 'sub_categoriaID', 'Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'categoriaID'], 'required'],
             [['usuarioID', 'sub_categoriaID', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'categoriaID', 'status_anuncio'], 'integer'],
-            [['Descripcion','imagen'], 'string'],
+            [['Descripcion'], 'string'],
             [['Fecha_Publicacion', 'Fecha_Caducidad'], 'safe'],
             [['Titulo'], 'string', 'max' => 50],
             [['Clasificacion'], 'string', 'max' => 10],
             [['DireccionVendedor'], 'string', 'max' => 255],
+            [['imagen'], 'file', 'checkExtensionByMimeType' => false,'extensions' => 'png, jpg'],
         ];
     }
 
@@ -61,9 +62,9 @@ class Anuncio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'anuncioID' => 'Anuncio ID',
-            'usuarioID' => 'Usuario ID',
-            'sub_categoriaID' => 'Sub Categoria ',
+            'anuncioID' => 'Codigo Anuncio',
+            'usuarioID' => 'Codigo Vendedor',
+            'sub_categoriaID' => 'Sub Categoria del Anuncio ',
             'Titulo' => 'Titulo',
             'Clasificacion' => 'Clasificacion',
             'Descripcion' => 'Descripcion',
@@ -72,8 +73,8 @@ class Anuncio extends \yii\db\ActiveRecord
             'Calificacion_Vendedor' => 'Calificacion  Vendedor',
             'Fecha_Publicacion' => 'Fecha  Publicacion',
             'Fecha_Caducidad' => 'Fecha  Caducidad',
-            'categoriaID' => 'Categoria ',
-            'imagen'=> 'Imagen del Anuncio',
+            'categoriaID' => 'Categoria del Anuncio ',
+            'imagen' => 'Imagen Principal del Anuncio',
             'status_anuncio' => 'Status Anuncio',
         ];
     }
@@ -101,4 +102,12 @@ class Anuncio extends \yii\db\ActiveRecord
     {
         return $this->hasMany(JoinsubCategoriatoanuncio::className(), ['anuncioID' => 'anuncioID']);
     }
+    public function upload(){
+        if ($this->validate()) {
+            $this->imagen->saveAs('uploads/' . $this->imagen->baseName . '.' . $this->imagen->extension);
+            return true;
+        } else {
+            return false;
+        }
+}
 }

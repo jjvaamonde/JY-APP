@@ -8,7 +8,9 @@ use backend\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\models\FileUpload;
+use yii\web\UploadedFile; //new
+use app\models\UploadForm;
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
  */
@@ -50,9 +52,8 @@ class AnuncioController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-       {
-         return $this->redirect(['view', 'id' => $model->anuncioID]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
         } else {
             return $this->render('view', ['model' => $model]);
         }
@@ -65,19 +66,24 @@ class AnuncioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Anuncio;
+        $model = new Anuncio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($model->load(Yii::$app->request->post()))
          {
-             $model->status_anuncio ='1';
-             if($model->save())
-             {
-                 return $this->redirect(['view', 'id' => $model->anuncioID]);
-             }
-            else{
-                  print_r($model->getErrors());
+            $model->status_anuncio === 1;
+            $model->imagen=UploadedFile::getInstance($model, 'imagen');
+            $model->usuarioID=Yii::$app->user->id;
+          if($model->save()){
+             if($model->upload()){
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
             }
-        } else {
+          }
+            else{
+             print_r($model->getFirstErrors());
+            }
+        } else
+        {
+
             return $this->render('create', [
                 'model' => $model,
             ]);

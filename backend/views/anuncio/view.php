@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\detail\DetailView;
 use kartik\datecontrol\DateControl;
-
+use kartik\widgets\FileInput;
 /**
  * @var yii\web\View $this
  * @var backend\models\Anuncio $model
@@ -65,6 +65,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'categoriaID',
+            [
+              'attribute' =>  'imagen',
+              'type' => DetailView::INPUT_WIDGET,
+              'widgetOptions' => [
+                  'class' =>FileInput::classname(),
+                'pluginOptions' => [
+               'showUpload' => false,
+               'showRemove' => false,
+               //'showBrowser' => false,
+                'browseClass' => 'btn btn-success',
+                'uploadClass' => 'btn btn-info',
+                    'removeClass' => 'btn btn-danger',
+                    'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> '
+                  ], 'language' => 'es'
+             ],
+           ],
             'status_anuncio',
         ],
         'deleteOptions' => [

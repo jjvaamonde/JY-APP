@@ -16,7 +16,7 @@ class AnuncioSearch extends Anuncio
     {
         return [
             [['anuncioID', 'usuarioID', 'sub_categoriaID', 'Cantidad_Articulo', 'Calificacion_Vendedor', 'categoriaID', 'status_anuncio'], 'integer'],
-            [['Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad'], 'safe'],
+            [['Titulo', 'Clasificacion', 'Descripcion', 'DireccionVendedor', 'Fecha_Publicacion', 'Fecha_Caducidad', 'imagen'], 'safe'],
         ];
     }
 
@@ -53,7 +53,8 @@ class AnuncioSearch extends Anuncio
         $query->andFilterWhere(['like', 'Titulo', $this->Titulo])
             ->andFilterWhere(['like', 'Clasificacion', $this->Clasificacion])
             ->andFilterWhere(['like', 'Descripcion', $this->Descripcion])
-            ->andFilterWhere(['like', 'DireccionVendedor', $this->DireccionVendedor]);
+            ->andFilterWhere(['like', 'DireccionVendedor', $this->DireccionVendedor])
+            ->andFilterWhere(['like', 'imagen', $this->imagen]);
 
         return $dataProvider;
     }

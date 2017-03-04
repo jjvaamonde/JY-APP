@@ -41,6 +41,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'categoriaID') ?>
 
+    <?php // echo $form->field($model, 'imagen') ?>
+
     <?php // echo $form->field($model, 'status_anuncio') ?>
 
     <div class="form-group">
