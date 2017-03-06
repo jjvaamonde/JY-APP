@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var backend\models\AuncioSearch $searchModel
+ * @var backend\models\AnuncioSearch $searchModel
  */
 
 $this->title = 'Anuncios';
@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'anuncioID',
-            'Vendedor',
-            'Sub_Categoria',
+            'usuarioID',
+            'sub_categoriaID',
             'Titulo',
             'Clasificacion',
 //            'Descripcion:ntext', 
@@ -39,8 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'Cantidad_Articulo', 
 //            'Calificacion_Vendedor', 
 //            ['attribute' => 'Fecha_Publicacion','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
-//            'Fecha_Caducidad', 
-//            'CantImagen', 
+//            ['attribute' => 'Fecha_Caducidad','format' => ['date',(isset(Yii::$app->modules['datecontrol']['displaySettings']['date'])) ? Yii::$app->modules['datecontrol']['displaySettings']['date'] : 'd-m-Y']], 
+//            'categoriaID', 
+//            'imagen', 
 //            'status_anuncio', 
 
             [

@@ -4,26 +4,25 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Anuncio;
-use backend\models\AuncioSearch;
+use backend\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\models\FileUpload;
+use yii\web\UploadedFile; //new
+use app\models\UploadForm;
 /**
  * AnuncioController implements the CRUD actions for Anuncio model.
  */
 class AnuncioController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,12 +34,12 @@ class AnuncioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuncioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new AnuncioSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -51,9 +50,13 @@ class AnuncioController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->anuncioID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -65,9 +68,22 @@ class AnuncioController extends Controller
     {
         $model = new Anuncio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()))
+         {
+            $model->status_anuncio === 1;
+            $model->imagen=UploadedFile::getInstance($model, 'imagen');
+            $model->usuarioID=Yii::$app->user->id;
+          if($model->save()){
+             if($model->upload()){
             return $this->redirect(['view', 'id' => $model->anuncioID]);
-        } else {
+            }
+          }
+            else{
+             print_r($model->getFirstErrors());
+            }
+        } else
+        {
+
             return $this->render('create', [
                 'model' => $model,
             ]);

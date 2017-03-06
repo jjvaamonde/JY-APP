@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Premio;
-use app\models\PremioSearch;
+use backend\models\Premio;
+use backend\models\PremioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,22 +66,13 @@ class PremioController extends Controller
     {
         $model = new Premio;
 
-        if ($model->load(Yii::$app->request->post()) ) 
-        {
-           $model->status_pre='1';
-            if($model->save()){
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->premioID]);
         } else {
-             # code...
-            print_r($model->getErrors());
-          }
-        }
-          else{
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-        
     }
 
     /**

@@ -37,8 +37,12 @@ class Operacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+<<<<<<< HEAD
             'operacionID' => 'Operación ID',
-            'nombre_op' => 'Nombre de Operación',
+=======
+            'operacion_ID' => 'Operación ID',
+>>>>>>> origin/cambios-jose
+            'nombre_op' => 'Nombre Operación',
         ];
     }
 }

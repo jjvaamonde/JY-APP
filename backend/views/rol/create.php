@@ -1,14 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-use backend\models\Rol;
+
 /**
  * @var yii\web\View $this
  * @var backend\models\Rol $model
  */
 
 $this->title = 'Create Rol';
-$this->params['breadcrumbs'][] = ['label' => 'Rols', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rol-create">
@@ -16,12 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
     <?= $this->render('_form', [
- 
-	'model' => $model,
-	 
-	'tipoOperaciones' => $tipoOperaciones
-	 
-	]) ?>
-
+        'model' => $model,
+        'tipoOperaciones' => $tipoOperaciones
+    ]) ?>
 
 </div>

@@ -1,18 +1,19 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
 /**
  * This is the model class for table "ventas_usuario".
  *
- * @property integer $Cod_Vendedor
+ * @property integer $ventas_UsuarioID
+ * @property integer $usuarioVenID
+ * @property integer $usuarioComID
  * @property string $Fecha_Venta
  * @property double $Monto
- * @property integer $Cod_Comprador
  * @property string $Tipo_Pago
- * @property integer $ventas_UsuarioID
+ * @property integer $status_venta
  *
  * @property JoinventasUsuariotousuario[] $joinventasUsuariotousuarios
  */
@@ -32,8 +33,8 @@ class VentasUsuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Cod_Vendedor', 'Fecha_Venta', 'Monto', 'Cod_Comprador', 'Tipo_Pago', 'ventas_UsuarioID'], 'required'],
-            [['Cod_Vendedor', 'Cod_Comprador', 'ventas_UsuarioID'], 'integer'],
+            [['usuarioVenID', 'usuarioComID', 'Fecha_Venta', 'Monto', 'Tipo_Pago', 'status_venta'], 'required'],
+            [['usuarioVenID', 'usuarioComID', 'status_venta'], 'integer'],
             [['Fecha_Venta'], 'safe'],
             [['Monto'], 'number'],
             [['Tipo_Pago'], 'string', 'max' => 50],
@@ -46,12 +47,13 @@ class VentasUsuario extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cod_Vendedor' => 'Cod  Vendedor',
+            'ventas_UsuarioID' => 'Ventas  Usuario ID',
+            'usuarioVenID' => 'Usuario Ven ID',
+            'usuarioComID' => 'Usuario Com ID',
             'Fecha_Venta' => 'Fecha  Venta',
             'Monto' => 'Monto',
-            'Cod_Comprador' => 'Cod  Comprador',
             'Tipo_Pago' => 'Tipo  Pago',
-            'ventas_UsuarioID' => 'Ventas  Usuario ID',
+            'status_venta' => 'Status Venta',
         ];
     }
 

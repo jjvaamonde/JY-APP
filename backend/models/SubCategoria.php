@@ -8,12 +8,11 @@ use Yii;
  * This is the model class for table "sub_categoria".
  *
  * @property integer $sub_CategoriaID
- * @property integer $Cod_Categoria
+ * @property integer $categoriaID
  * @property string $Nombre_SubCat
  * @property string $Descripcion_Subcat
  * @property integer $status_sub
  *
- * @property Anuncio $anuncio
  * @property JoinsubCategoriatoanuncio[] $joinsubCategoriatoanuncios
  * @property JoinsubCategoriatocategoria[] $joinsubCategoriatocategorias
  */
@@ -33,10 +32,9 @@ class SubCategoria extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Cod_Categoria', 'Nombre_SubCat', 'Descripcion_Subcat', 'status_sub'], 'required'],
-            [['Cod_Categoria', 'status_sub'], 'integer'],
+            [['categoriaID', 'Nombre_SubCat', 'Descripcion_Subcat', 'status_sub'], 'required'],
+            [['categoriaID', 'status_sub'], 'integer'],
             [['Nombre_SubCat', 'Descripcion_Subcat'], 'string', 'max' => 50],
-            [['Cod_Categoria'], 'unique'],
         ];
     }
 
@@ -47,19 +45,11 @@ class SubCategoria extends \yii\db\ActiveRecord
     {
         return [
             'sub_CategoriaID' => 'Sub  Categoria ID',
-            'Cod_Categoria' => 'Cod  Categoria',
+            'categoriaID' => 'Categoria ID',
             'Nombre_SubCat' => 'Nombre  Sub Cat',
             'Descripcion_Subcat' => 'Descripcion  Subcat',
             'status_sub' => 'Status Sub',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAnuncio()
-    {
-        return $this->hasOne(Anuncio::className(), ['Sub_Categoria' => 'sub_CategoriaID']);
     }
 
     /**

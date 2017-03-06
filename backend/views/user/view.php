@@ -10,7 +10,7 @@ use kartik\datecontrol\DateControl;
  */
 
 $this->title = $model->usuarioID;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -31,12 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'usuarioID',
             'Rif_CI',
-            'Login',
-            'Clave',
+            'username',
+            'premioID',
+            'paquete_premiunID',
+            'publicidadID',
             'Nombre',
             'Direccion:ntext',
             'Telefono',
-            'Correo_Electronico',
+            'email:email',
             'auth_key',
             'created_at',
             'updated_at',
@@ -45,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'Avatar',
             'Calificacion',
             'Puntos',
-            'rol_id',
+            'rol_ID',
             [
                 'attribute' => 'Fecha_UltimaConexion',
                 'format' => [
@@ -60,9 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'Cod_Referido',
-            'paquete_PremiumID',
-            'premioID',
-            'publicidadID',
             'reclamosID',
             'status',
         ],

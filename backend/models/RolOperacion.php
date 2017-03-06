@@ -1,14 +1,14 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
 /**
  * This is the model class for table "rol_operacion".
  *
- * @property integer $rol_id
- * @property integer $operacion_id
+ * @property integer $rol_ID
+ * @property integer $operacion_ID
  */
 class RolOperacion extends \yii\db\ActiveRecord
 {
@@ -26,8 +26,8 @@ class RolOperacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rol_id', 'operacion_id'], 'required'],
-            [['rol_id', 'operacion_id'], 'integer'],
+            [['rol_ID', 'operacion_ID'], 'required'],
+            [['rol_ID', 'operacion_ID'], 'integer'],
         ];
     }
 
@@ -37,8 +37,8 @@ class RolOperacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'rol_id' => 'Rol ID',
-            'operacion_id' => 'Operacion ID',
+            'rol_ID' => 'Rol  ID',
+            'operacion_ID' => 'Operacion  ID',
         ];
     }
 }

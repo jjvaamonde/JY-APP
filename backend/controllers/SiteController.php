@@ -7,7 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\AccessHelpers;
-
+use common\models\User;
 /**
  * Site controller
  */
@@ -61,8 +61,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+      $user = Yii::$app->user->id;
+      $model=User::findIdentity($user);
+      if($model->rol_ID === 3 ){
+        $this->layout = '//main';
         return $this->render('index');
+      }else
+      {
+        if($model->rol_ID === 2 ){
+          $this->layout = '//main2';
+          return $this->render('index');
+        }
+        else{
+            return $this->redirect('http://localhost/JY-APP/frontend/web');
+        }
+      }
+
     }
+
 
     /**
      * Login action.
@@ -79,8 +95,9 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
-             
-            return $this->render('login', [
+             $this->layout = '//main-login';
+            return $this->render('login',
+            [
                 'model' => $model,
             ]);
         }

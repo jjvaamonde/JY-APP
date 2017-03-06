@@ -15,7 +15,7 @@ class ReclamoSearch extends Reclamos
     public function rules()
     {
         return [
-            [['reclamosID', 'Usuario', 'status'], 'integer'],
+            [['reclamosID', 'usuarioID', 'status'], 'integer'],
             [['Descripcion', 'Motivo', 'Fecha', 'Estado_reclamo'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class ReclamoSearch extends Reclamos
 
         $query->andFilterWhere([
             'reclamosID' => $this->reclamosID,
-            'Usuario' => $this->Usuario,
+            'usuarioID' => $this->usuarioID,
             'Fecha' => $this->Fecha,
             'status' => $this->status,
         ]);

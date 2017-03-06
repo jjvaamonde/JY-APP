@@ -6,10 +6,10 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Operacion $model
+ * @var backend\models\Operacion $model
  */
 
-$this->title = $model->operacionID;
+$this->title = $model->operacion_ID;
 $this->params['breadcrumbs'][] = ['label' => 'Operacions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -29,11 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => DetailView::TYPE_INFO,
         ],
         'attributes' => [
-            'operacionID',
+            'operacion_ID',
             'nombre_op',
         ],
         'deleteOptions' => [
-            'url' => ['delete', 'id' => $model->operacionID],
+            'url' => ['delete', 'id' => $model->operacion_ID],
         ],
         'enableEditMode' => true,
     ]) ?>

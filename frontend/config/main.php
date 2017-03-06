@@ -41,11 +41,11 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'class' => 'yii\web\UrlManager',
+                     'hostInfo' => 'http://localhost/frontend',
         ],
-        */
+*/
     ],
     'params' => $params,
-    
+
 ];

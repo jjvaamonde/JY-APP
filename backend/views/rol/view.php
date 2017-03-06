@@ -10,7 +10,7 @@ use kartik\datecontrol\DateControl;
  */
 
 $this->title = $model->rol_ID;
-$this->params['breadcrumbs'][] = ['label' => 'Rols', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rol-view">
@@ -39,14 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     
     <h2>Operaciones Permitidas</h2>
-     
-    <?php
-     
-    foreach ($model->operacionesPermitidasList as $operacionPermitida) {
-        echo $operacionPermitida['nombre'] . "
-    ";
-    }
-     
-    ?>
+ 
+        <?php
+         
+        foreach ($model->operacionesPermitidasList as $operacionPermitida) {
+            echo $operacionPermitida['nombre_op'] . "
+        ";
+        }
+         
+        ?>
 
 </div>

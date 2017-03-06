@@ -17,7 +17,6 @@ use Yii;
  * @property integer $statusPP
  *
  * @property JointipoAnunciotopaquetePremium[] $jointipoAnunciotopaquetePremia
- * @property Usuario $usuario
  */
 class PaquetePremium extends \yii\db\ActiveRecord
 {
@@ -65,13 +64,5 @@ class PaquetePremium extends \yii\db\ActiveRecord
     public function getJointipoAnunciotopaquetePremia()
     {
         return $this->hasMany(JointipoAnunciotopaquetePremium::className(), ['paquete_PremiumID' => 'paquete_PremiumID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsuario()
-    {
-        return $this->hasOne(Usuario::className(), ['paquete_PremiumID' => 'paquete_PremiumID']);
     }
 }

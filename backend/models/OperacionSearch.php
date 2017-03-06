@@ -1,21 +1,21 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Operacion;
+use backend\models\Operacion;
 
 /**
- * OperacionSearch represents the model behind the search form about `app\models\Operacion`.
+ * OperacionSearch represents the model behind the search form about `backend\models\Operacion`.
  */
 class OperacionSearch extends Operacion
 {
     public function rules()
     {
         return [
-            [['operacionID'], 'integer'],
+            [['operacion_ID'], 'integer'],
             [['nombre_op'], 'safe'],
         ];
     }
@@ -39,7 +39,7 @@ class OperacionSearch extends Operacion
         }
 
         $query->andFilterWhere([
-            'operacionID' => $this->operacionID,
+            'operacion_ID' => $this->operacionID,
         ]);
 
         $query->andFilterWhere(['like', 'nombre_op', $this->nombre_op]);

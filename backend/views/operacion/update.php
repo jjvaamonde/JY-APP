@@ -4,12 +4,12 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Operacion $model
+ * @var backend\models\Operacion $model
  */
 
-$this->title = 'Update Operacion: ' . ' ' . $model->operacionID;
-$this->params['breadcrumbs'][] = ['label' => 'Operacions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->operacionID, 'url' => ['view', 'id' => $model->operacionID]];
+$this->title = 'Update Operacion: ' . ' ' . $model->operacion_ID;
+$this->params['breadcrumbs'][] = ['label' => 'Operaciones', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->operacion_ID, 'url' => ['view', 'id' => $model->operacion_ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="operacion-update">

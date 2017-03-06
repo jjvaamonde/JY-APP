@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var backend\models\RolSearch $searchModel
  */
 
-$this->title = 'Rols';
+$this->title = 'Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rol-index">

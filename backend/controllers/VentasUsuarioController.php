@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\VentasUsuario;
-use app\models\VentasUsuarioSearch;
+use backend\models\VentasUsuario;
+use backend\models\VentasUsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,16 +14,13 @@ use yii\filters\VerbFilter;
  */
 class VentasUsuarioController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,12 +32,12 @@ class VentasUsuarioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new VentasUsuarioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new VentasUsuarioSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -51,9 +48,13 @@ class VentasUsuarioController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->ventas_UsuarioID]);
+        } else {
+            return $this->render('view', ['model' => $model]);
+        }
     }
 
     /**
@@ -63,7 +64,7 @@ class VentasUsuarioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new VentasUsuario();
+        $model = new VentasUsuario;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ventas_UsuarioID]);

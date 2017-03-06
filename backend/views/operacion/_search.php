@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\models\OperacionSearch $model
+ * @var backend\models\OperacionSearch $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'operacionID') ?>
+    <?= $form->field($model, 'operacion_ID') ?>
 
     <?= $form->field($model, 'nombre_op') ?>
 
