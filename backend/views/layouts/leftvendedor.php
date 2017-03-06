@@ -30,7 +30,7 @@
             [
                 'options' => ['class' => 'sidebar-menu skin-blue'],
                 'items' => [
-                    ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
+                    ['label' => 'Menu hhJY-APP', 'options' => ['class' => 'header']],
                     ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
                     ['label' => 'Mis Datos', 'icon' => 'fa fa-file-code-o', 'url' => ['/user/view']],
                     [

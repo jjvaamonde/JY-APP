@@ -30,7 +30,7 @@
             [
                 'options' => ['class' => 'sidebar-menu skin-purple-light' ],
                 'items' => [
-                    ['label' => 'Menu JY-APP', 'options' => ['class' => 'header']],
+                    ['label' => 'Menu JY', 'options' => ['class' => 'header']],
                     ['label' => 'Anuncios', 'icon' => 'glyphicon glyphicon-bullhorn', 'url' => ['/anuncio']],
                     ['label' => 'Mis Datos', 'icon' => 'glyphicon glyphicon-user', 'url' => ['/user']],
                     ['label' => 'Reclamos', 'icon' => 'glyphicon glyphicon-registration-mark', 'url' => ['/reclamo']],

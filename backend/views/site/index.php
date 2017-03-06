@@ -4,7 +4,22 @@
 
 $this->title = 'JY-APP';
 ?>
+
+ <link rel="stylesheet" href="estilos.css" type="text/css" />
+
 <div class="site-index">
+
+
+	    <img src="img/001" alt="Slide 1" />
+	    <img src="img/002" alt="Slide 2" />
+	    <img src="img/003" alt="Slide 3" />    
+  	</div>  
+  	<button id="slideShowButton"></button> <!-- Optional button element. -->
+  	<script src="slideShow.js"></script>
+  
+ 
+    </div>  
+
 
     <div class="jumbotron">
     

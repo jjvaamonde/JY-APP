@@ -1,0 +1,5 @@
+
+#izquierda  {
+  width: 170px;
+  float: left;
+ }
